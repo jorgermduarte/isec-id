@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2022-02-23 12:00"
+      author: jorge-duarte
+      dbms: h2
+      runAlways: true
+      changes:
+        - sql:
+            sql: SET MODE ORACLE
