@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        elementFormDefault="qualified"
-        targetNamespace="http://www.example.com/books"
-        xmlns="http://www.example.com/books">
-
-<xs:element name="books">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="book" type="Book" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-
-<xs:complexType name="Book">
-<xs:sequence>
-<xs:element name="id" type="xs:long"/>
-<xs:element name="title" type="xs:string"/>
-<xs:element name="author" type="xs:string"/>
-<xs:element name="isbn" type="xs:string" minOccurs="0"/>
-<xs:element name="publicationDate" type="xs:date" minOccurs="0"/>
-<xs:element name="publisher" type="xs:string" minOccurs="0"/>
-<xs:element name="language" type="xs:string" minOccurs="0"/>
-<xs:element name="description" type="xs:string" minOccurs="0"/>
-<xs:element name="wookUrl" type="xs:string" minOccurs="0"/>
-<xs:element name="coverImageUrl" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="books">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="book" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:long"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="authorId" type="xs:long"/>
+                            <xs:element name="isbn" type="xs:string"/>
+                            <xs:element name="publicationDateString" type="xs:string"/>
+                            <xs:element name="publisher" type="xs:string"/>
+                            <xs:element name="language" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="pages" type="xs:long"/>
+                            <xs:element name="bertrandUrl" type="xs:string"/>
+                            <xs:element name="coverImageUrl" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

@@ -4,18 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 
 import org.springframework.stereotype.Repository;
-import org.xml.sax.SAXException;
 import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.wrappers.AuthorListWrapper;
 

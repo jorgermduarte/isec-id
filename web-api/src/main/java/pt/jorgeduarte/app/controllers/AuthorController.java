@@ -11,8 +11,6 @@ import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.services.AuthorService;
 import pt.jorgeduarte.domain.services.FileReaderTxtService;
 import pt.jorgeduarte.domain.services.WikipediaRegexService;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

@@ -1,46 +1,35 @@
 package pt.jorgeduarte.domain.entities;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
 @Getter
 @Setter
-@Table(name = "books")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
 
-    @Column(name = "isbn")
+    private Long authorId;
+
     private String isbn;
 
-    @Column(name = "publication_date")
-    private LocalDate publicationDate;
+    private String publicationDateString;
 
-    @Column(name = "publisher")
     private String publisher;
 
-    @Column(name = "language")
     private String language;
 
-    @Column(name = "description", columnDefinition = "CLOB")
-    @Lob
     private String description;
 
-    @Column(name = "wook_url")
-    private String wookUrl;
+    private Long pages;
 
-    @Column(name = "cover_image_url")
+    private String bertrandUrl;
+
     private String coverImageUrl;
-
-    // Constructors, getters, and setters
 }

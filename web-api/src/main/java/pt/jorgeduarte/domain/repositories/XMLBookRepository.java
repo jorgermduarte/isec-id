@@ -7,24 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
-
 import org.springframework.stereotype.Repository;
-import org.xml.sax.SAXException;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 
 @Repository
 public class XMLBookRepository implements IXMLRepository<Book> {
-    private static final String XML_FILE = "data/obras.xml";
+    private static final String XML_FILE = "output/obras.xml";
 
     private List<Book> books;
 
@@ -60,6 +53,12 @@ public class XMLBookRepository implements IXMLRepository<Book> {
 
     private void loadBooks() {
         try {
+            // Create the output directory if it does not exist
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdir();
+            }
+
             JAXBContext jaxbContext = JAXBContext.newInstance(BookListWrapper.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             FileInputStream fis = new FileInputStream(XML_FILE);
@@ -73,6 +72,12 @@ public class XMLBookRepository implements IXMLRepository<Book> {
 
     private void saveBooks() {
         try {
+            // Create the output directory if it does not exist
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdir();
+            }
+
             JAXBContext jaxbContext = JAXBContext.newInstance(BookListWrapper.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

@@ -4,13 +4,6 @@ import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.repositories.XMLBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +18,13 @@ public class BookService {
 
     public Book saveBook(Book book) {
         return bookRepository.save(book);
+    }
+
+    public List<Book> saveAll(List<Book> books) {
+        for (Book book : books) {
+            bookRepository.save(book);
+        }
+        return books;
     }
 
     public Optional<Book> findBookById(Long id) {

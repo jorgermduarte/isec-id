@@ -16,6 +16,7 @@
                         <th>Publication Date</th>
                         <th>Publisher</th>
                         <th>Language</th>
+                        <th>Image</th>
                     </tr>
                     <xsl:apply-templates select="books/book"/>
                 </table>
@@ -27,11 +28,14 @@
         <tr>
             <td><xsl:value-of select="id"/></td>
             <td><xsl:value-of select="title"/></td>
-            <td><xsl:value-of select="author"/></td>
+            <td><xsl:value-of select="authorId"/></td>
             <td><xsl:value-of select="isbn"/></td>
-            <td><xsl:value-of select="publicationDate"/></td>
+            <td><xsl:value-of select="publicationDateString"/></td>
             <td><xsl:value-of select="publisher"/></td>
             <td><xsl:value-of select="language"/></td>
+            <td>
+                <img src="{coverImageUrl}" alt="{title}"/>
+            </td>
         </tr>
     </xsl:template>
 </xsl:stylesheet>
