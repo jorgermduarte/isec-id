@@ -9,13 +9,16 @@ import pt.jorgeduarte.domain.services.FileReaderTxtService;
 import java.io.FileNotFoundException;
 
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/output")
 public class FileHandlerController {
     FileReaderTxtService fileReaderService;
 
-    @RequestMapping("/read/txt/{name}")
-
+    @RequestMapping("/txt/{name}")
     public ResponseEntity<String> readFileData(@PathVariable String name) throws FileNotFoundException {
         return ResponseEntity.ok().body(fileReaderService.read(name));
+    }
+    @RequestMapping("/html/{name}")
+    public ResponseEntity<String> readFileDataHtml(@PathVariable String name){
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }
