@@ -38,21 +38,4 @@ public class BookService {
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
     }
-
-    public void transformBooksToHtml() {
-        try {
-            TransformerFactory factory = TransformerFactory.newInstance();
-            StreamSource xsltSource = new StreamSource(new File("xslt/books_to_html.xslt"));
-            Transformer transformer = factory.newTransformer(xsltSource);
-
-            StreamSource xmlSource = new StreamSource(new File("data/obras.xml"));
-            FileOutputStream htmlOutput = new FileOutputStream("output/obras.html");
-            StreamResult result = new StreamResult(htmlOutput);
-
-            transformer.transform(xmlSource, result);
-            htmlOutput.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -103,15 +103,4 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
         return authors.stream().mapToLong(Author::getId).max().orElse(0) + 1;
     }
 
-    public void validateXmlFile() {
-        try {
-            File xsdFile = new File("definitions/author.xsd");
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = schemaFactory.newSchema(xsdFile);
-            Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(new File(XML_FILE)));
-        } catch (SAXException | IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

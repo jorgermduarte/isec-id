@@ -8,6 +8,4 @@ public interface IXMLRepository<T>{
     Optional<T> findById(Long id);
     List<T> findAll();
     void deleteById(Long id);
-
-    void validateXmlFile();
 }

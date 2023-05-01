@@ -12,11 +12,11 @@
     <xs:complexType name="Author">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
-            <xs:element name="full_name" type="xs:string"/>
-            <xs:element name="birth_date" type="xs:date"/>
-            <xs:element name="death_date" type="xs:date" minOccurs="0"/>
+            <xs:element name="fullName" type="xs:string"/>
+            <xs:element name="birthDateString" type="xs:date"/>
+            <xs:element name="deathDateString" type="xs:date" minOccurs="0"/>
             <xs:element name="nationality" type="xs:string"/>
-            <xs:element name="wikipedia_url" type="xs:string" minOccurs="0"/>
+            <xs:element name="wikipediaUrl" type="xs:string" minOccurs="0"/>
             <xs:element name="biography" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>

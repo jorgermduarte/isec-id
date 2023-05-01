@@ -37,8 +37,4 @@ public class AuthorService {
     public void deleteAuthorById(Long id) {
         xmlAuthorRepository.deleteById(id);
     }
-
-    public void validateXmlFile() {
-        xmlAuthorRepository.validateXmlFile();
-    }
 }
