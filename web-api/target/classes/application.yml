@@ -1,23 +1,2 @@
 server:
   port: 8083
-
-spring:
-  datasource:
-    url: jdbc:h2:file:~/current-app-data-integration/${spring.profiles.active:default}/db;AUTO_SERVER=TRUE
-    username: sa
-    password:
-    hikari:
-      maximum-pool-size: 10
-      max-lifetime: 350000
-      leak-detection-threshold: 150000
-      connection-timeout: 30000
-      data-source-properties:
-        oracle:
-          jdbc:
-            implicitStatementCacheSize: 100
-            useThreadLocalBufferCache: true
-  liquibase:
-    changeLog: classpath:/liquibase/changelog-master.yaml
-    contexts: local
-    enabled: true
-

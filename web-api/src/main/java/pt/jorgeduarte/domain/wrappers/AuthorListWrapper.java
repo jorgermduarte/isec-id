@@ -2,8 +2,8 @@ package pt.jorgeduarte.domain.wrappers;
 
 import pt.jorgeduarte.domain.entities.Author;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 @XmlRootElement(name = "authors")
