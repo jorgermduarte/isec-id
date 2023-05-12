@@ -35,6 +35,16 @@ public class XMLBookRepository implements IXMLRepository<Book> {
         return book;
     }
 
+    public List<Book> getAuthorBooks(Long authorId) {
+        List<Book> authorBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getAuthorId().equals(authorId)) {
+                authorBooks.add(book);
+            }
+        }
+        return authorBooks;
+    }
+
     @Override
     public Optional<Book> findById(Long id) {
         return books.stream().filter(book -> book.getId().equals(id)).findFirst();

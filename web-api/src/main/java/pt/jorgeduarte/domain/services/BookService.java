@@ -35,6 +35,10 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    public List<Book> getAuthorBooks(Long authorId) {
+        return bookRepository.getAuthorBooks(authorId);
+    }
+
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
     }

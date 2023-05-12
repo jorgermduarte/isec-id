@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.jorgeduarte.domain.entities.Author;
+import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.AuthorService;
+import pt.jorgeduarte.domain.services.BookService;
 import pt.jorgeduarte.domain.services.FileReaderTxtService;
 import pt.jorgeduarte.domain.services.WikipediaRegexService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 @RestController
 @RequestMapping("/authors")
@@ -24,10 +27,13 @@ public class AuthorController {
 
     AuthorService authorService;
 
-    public AuthorController(WikipediaRegexService wikipediaRegexService, AuthorService authorService, FileReaderTxtService fileReaderTxtService) {
+    BookService bookService;
+
+    public AuthorController(WikipediaRegexService wikipediaRegexService, AuthorService authorService, FileReaderTxtService fileReaderTxtService, BookService bookService) {
         this.wikipediaRegexService = wikipediaRegexService;
         this.authorService = authorService;
         this.fileReaderTxtService = fileReaderTxtService;
+        this.bookService = bookService;
     }
 
     @RequestMapping
@@ -48,7 +54,12 @@ public class AuthorController {
 
     @RequestMapping("/{id}")
     public Author getAuthorInfo(@PathVariable Long id){
-        return authorService.findAuthorById(id).orElseThrow(() -> new RuntimeException("Author not found!"));
+      Author author = this.authorService.findAuthorById(id).orElseThrow(() -> new RuntimeException("Author not found!"));
+
+      // get author books
+      List<Book> books = bookService.getAuthorBooks(id);
+      author.setBooks(books);
+      return author;
     }
 
     @RequestMapping("/sync")

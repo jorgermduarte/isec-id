@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
@@ -27,5 +27,5 @@ public class Author {
 
     private String biography;
 
-    private Set<Book> books;
+    private List<Book> books;
 }
