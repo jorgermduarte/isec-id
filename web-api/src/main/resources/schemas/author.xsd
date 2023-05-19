@@ -18,6 +18,7 @@
             <xs:element name="nationality" type="xs:string"/>
             <xs:element name="wikipediaUrl" type="xs:string" minOccurs="0"/>
             <xs:element name="biography" type="xs:string" minOccurs="0"/>
+            <xs:element name="coverImageUrl" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 

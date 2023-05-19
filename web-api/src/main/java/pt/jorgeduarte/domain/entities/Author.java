@@ -28,4 +28,6 @@ public class Author {
     private String biography;
 
     private List<Book> books;
+
+    private String coverImageUrl;
 }

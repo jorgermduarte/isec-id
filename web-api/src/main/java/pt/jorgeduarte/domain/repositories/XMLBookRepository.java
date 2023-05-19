@@ -11,7 +11,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import net.sf.saxon.s9api.*;
 import org.springframework.stereotype.Repository;
+import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 
@@ -103,6 +106,103 @@ public class XMLBookRepository implements IXMLRepository<Book> {
 
     private Long generateId() {
         return books.stream().mapToLong(Book::getId).max().orElse(0) + 1;
+    }
+
+    private List<Book> findBooksByXPathSaxon(String expression) {
+        List<Book> books = new ArrayList<>();
+        try {
+            // Create the output directory if it does not exist
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdir();
+            }
+
+            Processor processor = new Processor(false);
+            DocumentBuilder builder = processor.newDocumentBuilder();
+            XdmNode document = builder.build(new File(XML_FILE));
+
+            XPathCompiler compiler = processor.newXPathCompiler();
+            XPathSelector selector = compiler.compile(expression).load();
+            selector.setContextItem(document);
+
+            // Iterate over all matches
+            for (XdmItem item : selector) {
+                if (item instanceof XdmNode) {
+                    XdmNode node = (XdmNode) item;
+                    Book book = new Book();
+                    // Iterate over all child elements of the node
+                    for (XdmItem child : node.children()) {
+                        if (child instanceof XdmNode) {
+                            XdmNode childNode = (XdmNode) child;
+                            try{
+                                String nodeName = childNode.getNodeName().getLocalName();
+                                String nodeValue = childNode.getStringValue();
+                                // Depending on the name of the node, set the appropriate field on the Book object
+                                switch (nodeName) {
+                                    case "id":
+                                        book.setId(Long.parseLong(nodeValue));
+                                        break;
+                                    case "title":
+                                        book.setTitle(nodeValue);
+                                        break;
+                                    case "authorId":
+                                        book.setAuthorId((Long.parseLong(nodeValue)));
+                                        break;
+                                    case "isbn":
+                                        book.setIsbn(nodeValue);
+                                        break;
+                                    case "publicationDateString":
+                                        book.setPublicationDateString(nodeValue);
+                                        break;
+                                    case "publisher":
+                                        book.setPublisher(nodeValue);
+                                        break;
+                                    case "language":
+                                       book.setLanguage(nodeValue);
+                                        break;
+                                    case "description":
+                                        book.setDescription(nodeValue);
+                                        break;
+                                    case "pages":
+                                        book.setPages((Long.parseLong(nodeValue)));
+                                        break;
+                                    case "bertrandUrl":
+                                        book.setBertrandUrl(nodeValue);
+                                        break;
+                                    case "coverImageUrl":
+                                        book.setCoverImageUrl(nodeValue);
+                                        break;
+                                }
+                            }catch(Exception ex){}
+                        }
+                    }
+                    books.add(book);
+                }
+            }
+        } catch (SaxonApiException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
+    public List<Book> xPathFindBooksByTitle(String title) {
+        return findBooksByXPathSaxon("//book[title='"+ title +"']");
+    }
+
+    public List<Book> xPathFindBooksByLanguage(String language) {
+        return findBooksByXPathSaxon("//book[language='"+ language +"']");
+    }
+
+    public List<Book> xPathFindBooksByNumberOfPages(Long pages) {
+        return findBooksByXPathSaxon("//book[pages='"+ pages +"']");
+    }
+
+    public List<Book> xPathFindBooksByPublicationDate(String publicationDateString) {
+        return findBooksByXPathSaxon("//book[publicationDateString='"+ publicationDateString +"']");
+    }
+
+    public List<Book> xPathFindBooksByIsbn(String isbn) {
+        return findBooksByXPathSaxon("//book[isbn='"+ isbn +"']");
     }
 }
 

@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import net.sf.saxon.s9api.*;
 import org.springframework.stereotype.Repository;
 import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.wrappers.AuthorListWrapper;
@@ -97,4 +98,88 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
         return authors.stream().mapToLong(Author::getId).max().orElse(0) + 1;
     }
 
+    private List<Author> findAuthorsByXPathSaxon(String expression) {
+        List<Author> authors = new ArrayList<>();
+        try {
+            // Create the output directory if it does not exist
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdir();
+            }
+
+            Processor processor = new Processor(false);
+            DocumentBuilder builder = processor.newDocumentBuilder();
+            XdmNode document = builder.build(new File(XML_FILE));
+
+            XPathCompiler compiler = processor.newXPathCompiler();
+            XPathSelector selector = compiler.compile(expression).load();
+            selector.setContextItem(document);
+
+            // Iterate over all matches
+            for (XdmItem item : selector) {
+                if (item instanceof XdmNode) {
+                    XdmNode node = (XdmNode) item;
+                    Author author = new Author();
+                    // Iterate over all child elements of the node
+                    for (XdmItem child : node.children()) {
+                        if (child instanceof XdmNode) {
+                            XdmNode childNode = (XdmNode) child;
+                            try{
+                                String nodeName = childNode.getNodeName().getLocalName();
+                                String nodeValue = childNode.getStringValue();
+                            // Depending on the name of the node, set the appropriate field on the Author object
+                            switch (nodeName) {
+                                case "id":
+                                    author.setId(Long.parseLong(nodeValue));
+                                    break;
+                                case "fullName":
+                                    author.setFullName(nodeValue);
+                                    break;
+                                case "birthDateString":
+                                    author.setBirthDateString(nodeValue);
+                                    break;
+                                case "deathDateString":
+                                    author.setDeathDateString(nodeValue);
+                                    break;
+                                case "nationality":
+                                    author.setNationality(nodeValue);
+                                    break;
+                                case "wikipediaUrl":
+                                    author.setWikipediaUrl(nodeValue);
+                                    break;
+                                case "biography":
+                                    author.setBiography(nodeValue);
+                                    break;
+                            }
+                            }catch(Exception ex){}
+                        }
+                    }
+                    authors.add(author);
+                }
+            }
+        } catch (SaxonApiException e) {
+            e.printStackTrace();
+        }
+        return authors;
+    }
+
+    public Optional<Author> xPathFindAuthorByFullName(String name){
+        return findAuthorsByXPathSaxon("//author[fullName='"+ name +"']").stream().findFirst();
+    }
+
+    public List<Author> xPathFindAuthorsBornBeforeDate(String date){
+        return findAuthorsByXPathSaxon("//author[translate(birthDateString, '-', '') < translate('" + date + "', '-', '')]");
+    }
+
+    public List<Author> xPathFindAuthorsPassedAway(){
+        return findAuthorsByXPathSaxon("//author[deathDateString!='']");
+    }
+
+    public List<Author> xPathFindAuthorsByBiographyText(String text){
+        return findAuthorsByXPathSaxon("//author[contains(biography, '" + text + "')]");
+    }
+
+    public List<Author> xPathFindAuthorsStillAlive(){
+        return findAuthorsByXPathSaxon("//author[not(exists(deathDateString))]");
+    }
 }

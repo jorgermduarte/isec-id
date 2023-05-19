@@ -2,6 +2,7 @@ package pt.jorgeduarte.domain.services;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import pt.jorgeduarte.domain.entities.Author;
 
@@ -10,6 +11,7 @@ import org.jsoup.select.Elements;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +31,7 @@ public class WikipediaRegexService {
 
             String contentInfo = doc.select(".infobox").text();
 
-            // Birth date
+            // Birthdate
             Pattern birthDatePattern = Pattern.compile("(?<=Nascimento\\s)(\\d{1,2}\\sde\\s[a-zA-Z]+\\sde\\s\\d{4})");
             Matcher birthDateMatcher = birthDatePattern.matcher(contentInfo);
             if (birthDateMatcher.find()) {
@@ -78,6 +80,14 @@ public class WikipediaRegexService {
 
             biography = biography.replaceAll("\\[\\d+]", "").trim();
             authorObj.setBiography(biography);
+
+            // Image url
+            Elements imageElements = doc.select(".infobox img");
+            List<Element> filteredElements = imageElements.stream().filter(element -> element.absUrl("src").toLowerCase().contains("jpg")).toList();
+            if (!filteredElements.isEmpty()) {
+                String imageUrl = filteredElements.get(0).absUrl("src");
+                authorObj.setCoverImageUrl(imageUrl);
+            }
 
             return authorObj;
         } catch (IOException e) {

@@ -3,6 +3,7 @@ package pt.jorgeduarte.domain.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.jorgeduarte.domain.entities.Author;
+import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.repositories.XMLAuthorRepository;
 
 import java.util.List;
@@ -37,4 +38,25 @@ public class AuthorService {
     public void deleteAuthorById(Long id) {
         xmlAuthorRepository.deleteById(id);
     }
+
+    public Optional<Author> xPathFindAuthorByFullName(String name){
+        return xmlAuthorRepository.xPathFindAuthorByFullName(name);
+    }
+
+    public List<Author> xPathFindAuthorsBornBeforeDate(String date){
+        return xmlAuthorRepository.xPathFindAuthorsBornBeforeDate(date);
+    }
+
+    public List<Author> xPathFindAuthorsPassedAway(){
+        return xmlAuthorRepository.xPathFindAuthorsPassedAway();
+    }
+
+    public List<Author> xPathFindAuthorsByBiographyText(String text){
+        return xmlAuthorRepository.xPathFindAuthorsByBiographyText(text);
+    }
+
+    public List<Author> xPathFindAuthorsStillAlive(){
+        return xmlAuthorRepository.xPathFindAuthorsStillAlive();
+    }
+
 }

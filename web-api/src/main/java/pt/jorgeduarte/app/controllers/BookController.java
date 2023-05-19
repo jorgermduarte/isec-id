@@ -6,7 +6,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.BertrandJdomService;
 import pt.jorgeduarte.domain.services.BookService;
@@ -30,6 +32,35 @@ public class BookController {
     @RequestMapping("/{id}")
     public Book getBookByID(@PathVariable Long id){
         return bookService.findBookById(id).orElseThrow(() -> new RuntimeException("Book not found!"));
+    }
+    @RequestMapping("/filter/{filterType}")
+    public ResponseEntity<List<Book>> filterAuthors(@PathVariable String filterType, @RequestParam(required = false) String target) {
+        List<Book> books;
+        switch (filterType) {
+            case "title":
+                books = bookService.xPathFindBooksByTitle(target);
+                break;
+            case "language":
+                books = bookService.xPathFindBooksByLanguage(target);
+                break;
+            case "publicationDateString":
+                books = bookService.xPathFindBooksByPublicationDate(target);
+                break;
+            case "isbn":
+                books = bookService.xPathFindBooksByIsbn(target);
+                break;
+            case "pages":
+                books = bookService.xPathFindBooksByNumberOfPages(Long.valueOf(target));
+                break;
+            default:
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (books.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
     @RequestMapping

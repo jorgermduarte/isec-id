@@ -40,7 +40,8 @@ public class BertrandJdomService {
 
                 for (String bookUrl : bookUrls) {
                     Book book = fetchBookDetails(bookUrl, authorId);
-                    books.add(book);
+                    if(book != null)
+                        books.add(book);
                 }
 
             } catch (IOException e) {
@@ -66,20 +67,23 @@ public class BertrandJdomService {
             String bertrandBookId = urlParts[urlParts.length - 1];
 
             // ISBN do livro
-            String isbn = document.selectFirst(".info-area span:contains(ISBN) .info").text();
+            String isbn = document.selectFirst("#productPageSectionDetails-collapseDetalhes-content-isbn .info").text();
 
             Element yearElement = document.selectFirst("#productPageSectionDetails-collapseDetalhes-content-year .info");
             String year = yearElement.text().trim();
 
-            Element publisherElement = document.selectFirst("span[itemtype='https://schema.org/Organization'] .info");
+            Element publisherElement = document.selectFirst("div[itemtype='https://schema.org/Organization'] .info");
             String publisher = publisherElement.text();
 
             Element languageElement = document.selectFirst("#productPageSectionDetails-collapseDetalhes-content-language .info");
             String language = languageElement.text();
 
-            Element pagesElement = document.selectFirst("#productPageSectionDetails-collapseDetalhes-content-nrPages .info");
-            Long pages = Long.parseLong(pagesElement.text());
-
+            Long pages = null;
+            try{
+                Element pagesElement = document.selectFirst("#productPageSectionDetails-collapseDetalhes-content-nrPages .info");
+                 pages = Long.parseLong(pagesElement.text());
+            }catch(Exception ex){
+            }
             String publicationDateString = document.select("#productPageSectionDetails-collapseDetalhes-content-year .info").text();
             // Sinopse do livro
             String synopsis = document.select("#productPageSectionAboutBook-sinopse p").text();
@@ -98,8 +102,9 @@ public class BertrandJdomService {
             book.setBertrandUrl(bookUrl);
             book.setCoverImageUrl(coverUrl);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            book = null;
         }
 
         return book;

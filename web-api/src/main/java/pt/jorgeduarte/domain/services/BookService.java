@@ -42,4 +42,23 @@ public class BookService {
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
     }
+
+    public List<Book> xPathFindBooksByTitle(String title) {
+        return bookRepository.xPathFindBooksByTitle(title);
+    }
+    public List<Book> xPathFindBooksByLanguage(String language){
+        return bookRepository.xPathFindBooksByLanguage(language);
+    }
+
+    public List<Book> xPathFindBooksByNumberOfPages(Long pages){
+        return bookRepository.xPathFindBooksByNumberOfPages(pages);
+    }
+
+    public List<Book> xPathFindBooksByPublicationDate(String publicationDateString){
+        return bookRepository.xPathFindBooksByPublicationDate(publicationDateString);
+    }
+
+    public List<Book> xPathFindBooksByIsbn(String isbn){
+        return bookRepository.xPathFindBooksByIsbn(isbn);
+    }
 }

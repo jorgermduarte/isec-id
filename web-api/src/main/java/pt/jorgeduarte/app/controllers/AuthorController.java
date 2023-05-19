@@ -4,9 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.AuthorService;
@@ -52,14 +50,31 @@ public class AuthorController {
         }
     }
 
-    @RequestMapping("/{id}")
-    public Author getAuthorInfo(@PathVariable Long id){
-      Author author = this.authorService.findAuthorById(id).orElseThrow(() -> new RuntimeException("Author not found!"));
+    @RequestMapping("/filter/{filterType}")
+    public ResponseEntity<List<Author>> filterAuthors(@PathVariable String filterType, @RequestParam(required = false) String target) {
+        List<Author> authors;
+        switch (filterType) {
+            case "bornBefore":
+                authors = authorService.xPathFindAuthorsBornBeforeDate(target);
+                break;
+            case "stillAlive":
+                authors = authorService.xPathFindAuthorsStillAlive();
+                break;
+            case "passedAway":
+                authors = authorService.xPathFindAuthorsPassedAway();
+                break;
+            case "bioContains":
+                authors = authorService.xPathFindAuthorsByBiographyText(target);
+                break;
+            default:
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-      // get author books
-      List<Book> books = bookService.getAuthorBooks(id);
-      author.setBooks(books);
-      return author;
+        if (authors.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(authors, HttpStatus.OK);
     }
 
     @RequestMapping("/sync")
@@ -100,11 +115,21 @@ public class AuthorController {
         }
 
         //check if author exists
-        if(authorService.findAuthorByFullName(name).isPresent()){
+        if(authorService.xPathFindAuthorByFullName(name).isPresent()){
             return ResponseEntity.ok("Author " + author.getFullName() + " already exists!");
         }else{
             authorService.saveAuthor(author);
             return ResponseEntity.ok("Author " + author.getFullName() + " synced with success!");
         }
+    }
+
+    @RequestMapping("/{id}")
+    public Author getAuthorInfo(@PathVariable Long id){
+      Author author = this.authorService.findAuthorById(id).orElseThrow(() -> new RuntimeException("Author not found!"));
+
+      // get author books
+      List<Book> books = bookService.getAuthorBooks(id);
+      author.setBooks(books);
+      return author;
     }
 }

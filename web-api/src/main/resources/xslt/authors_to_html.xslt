@@ -13,9 +13,10 @@
                 <table border="1" class="table table-striped">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Data de Nascimento</th>
-                        <th scope="col">Data de Falecimento</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Death date</th>
+                        <th scope="col">Image</th>
                     </tr>
                     <xsl:apply-templates select="authors/author"/>
                 </table>
@@ -29,6 +30,9 @@
             <td><xsl:value-of select="fullName"/></td>
             <td><xsl:value-of select="birthDateString"/></td>
             <td><xsl:value-of select="deathDateString"/></td>
+            <td>
+                <img src="{coverImageUrl}" alt="{title}" style="max-height:100px;"/>
+            </td>
         </tr>
     </xsl:template>
 
