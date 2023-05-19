@@ -20,7 +20,6 @@
 
 # A fazer
 
-- [ ] atualizar os schemas XSD para ir de encontro as entities atuais
 - [ ] adicionar documentação Postman
   - [ ] isto vai facilitar na defesa mostrando de forma clara todos os métodos existentes e o que é possivel fazer no projeto
 - [ ] ler requisitos do trabalho a ver se falta alguma coisa
