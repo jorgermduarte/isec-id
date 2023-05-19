@@ -66,12 +66,11 @@ public class AuthorController {
             case "bioContains":
                 authors = authorService.xPathFindAuthorsByBiographyText(target);
                 break;
+            case "minimumBooks":
+                authors = authorService.xQueryFindAuthorsWithMoreThanXBooks(Integer.parseInt(target));
+                break;
             default:
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        if (authors.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
         return new ResponseEntity<>(authors, HttpStatus.OK);

@@ -14,7 +14,6 @@ import javax.xml.bind.Unmarshaller;
 
 import net.sf.saxon.s9api.*;
 import org.springframework.stereotype.Repository;
-import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 

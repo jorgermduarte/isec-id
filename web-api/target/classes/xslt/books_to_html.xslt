@@ -19,6 +19,7 @@
                         <th scope="col">Publisher</th>
                         <th scope="col">Language</th>
                         <th scope="col">Image</th>
+                        <th scope="col"></th>
                     </tr>
                     <xsl:apply-templates select="books/book"/>
                 </table>
@@ -36,7 +37,10 @@
             <td><xsl:value-of select="publisher"/></td>
             <td><xsl:value-of select="language"/></td>
             <td>
-                <img src="{coverImageUrl}" alt="{title}"/>
+                <img src="{coverImageUrl}" alt="{title}" style="width:100px;height:150px;" />
+            </td>
+            <td>
+                <a href="{bertrandUrl}" target="_new"><button class="btn btn-primary" >View Book</button></a>
             </td>
         </tr>
     </xsl:template>

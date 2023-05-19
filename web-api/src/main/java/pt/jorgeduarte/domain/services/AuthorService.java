@@ -62,4 +62,9 @@ public class AuthorService {
     public Optional<Author> addBooksToAuthor(Long authorId, List<Book> books){
         return xmlAuthorRepository.addBooksToAuthor(authorId,books);
     }
+
+    public List<Author> xQueryFindAuthorsWithMoreThanXBooks(int minimumBooks){
+        return xmlAuthorRepository.xQueryFindAuthorsWithMoreThanXBooks(minimumBooks);
+    }
+
 }

@@ -3,7 +3,7 @@
 
 
 - [ ] **_JDOM??_** (JDOM é uma biblioteca Java para manipular documentos XML, ler escrever, nagvegar, alterar, e criar docs)
-- [ ] XQuery
+- [x] XQuery
 - [x] JAXB ( É uma API para manipulação de dados XML em Java e usado para converter objetos Java em XML e vice-versa)
 - [x] Expressões regulares (Regex)
 - [x] Spring Boot
@@ -18,11 +18,8 @@
 - [x] XPATH
 - [x] SAXON  ( Saxon é uma implementação de XPath, XSLT e XQuery)
 
-
-
 # A fazer
 
-- [ ] utilizar XQuery para fazer pesquisas mais deep e implementar no projeto
 - [ ] atualizar os schemas XSD para ir de encontro as entities atuais
 - [ ] dado o trabalho prático será que faz sentido em vez de andar a retornar json, retornar tudo em xml?
   - pesquisas de autores e livros por id
