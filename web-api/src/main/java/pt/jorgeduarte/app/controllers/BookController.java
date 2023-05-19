@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
+import pt.jorgeduarte.domain.services.AuthorService;
 import pt.jorgeduarte.domain.services.BertrandJdomService;
 import pt.jorgeduarte.domain.services.BookService;
 import java.io.IOException;
@@ -24,9 +24,12 @@ public class BookController {
     BertrandJdomService bertrandJsonService;
     BookService bookService;
 
-    public BookController(BookService bookService, BertrandJdomService bertrandJsonService) {
+    AuthorService authorService;
+
+    public BookController(BookService bookService, BertrandJdomService bertrandJsonService, AuthorService authorService) {
         this.bookService = bookService;
         this.bertrandJsonService = bertrandJsonService;
+        this.authorService = authorService;
     }
 
     @RequestMapping("/{id}")
@@ -83,6 +86,10 @@ public class BookController {
     public String syncAuthorBooks(@PathVariable Long authorId) {
         List<Book> books = bertrandJsonService.fetchBooksFromAuthor(authorId);
         bookService.saveAll(books);
+
+        //update the books of the author
+        authorService.addBooksToAuthor(authorId,books);
+
         return "Synced " + books.size() + " books from author id: " + authorId;
     }
 }

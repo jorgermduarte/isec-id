@@ -12,6 +12,7 @@ import javax.xml.bind.Unmarshaller;
 import net.sf.saxon.s9api.*;
 import org.springframework.stereotype.Repository;
 import pt.jorgeduarte.domain.entities.Author;
+import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.wrappers.AuthorListWrapper;
 
 @Repository
@@ -181,5 +182,32 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
 
     public List<Author> xPathFindAuthorsStillAlive(){
         return findAuthorsByXPathSaxon("//author[not(exists(deathDateString))]");
+    }
+
+    public Optional<Author> addBooksToAuthor(Long authorId, List<Book> books){
+        this.authors.forEach( a -> {
+            if(a.getId().equals(authorId)){
+
+                //let's verify if the author does not have the book in the book list
+                List<Book> currentAuthorBooks = a.getBooks();
+
+                if(currentAuthorBooks == null)
+                    currentAuthorBooks = new ArrayList<>();
+
+                // for each new book, lets see if the author does not contain it already
+                for (int i = 0; i < books.size(); i++) {
+                    int finalI = i;
+                    Optional<Book> bookExists = currentAuthorBooks.stream().filter(c -> c.getIsbn().equals(books.get(finalI).getIsbn())).findFirst();
+                    if(bookExists.isEmpty()){
+                        // add the book to the author
+                        currentAuthorBooks.add(books.get(finalI));
+                    }
+                }
+
+                a.setBooks(currentAuthorBooks);
+            }
+        });
+        saveAuthors();
+        return this.authors.stream().filter( a -> a.getId() == authorId).findFirst();
     }
 }

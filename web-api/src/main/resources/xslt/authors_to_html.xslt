@@ -14,9 +14,11 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Nationality</th>
                         <th scope="col">Birthdate</th>
                         <th scope="col">Death date</th>
                         <th scope="col">Image</th>
+                        <th scope="col"></th>
                     </tr>
                     <xsl:apply-templates select="authors/author"/>
                 </table>
@@ -28,10 +30,14 @@
         <tr>
             <td><xsl:value-of select="id"/></td>
             <td><xsl:value-of select="fullName"/></td>
+            <td><xsl:value-of select="nationality"/></td>
             <td><xsl:value-of select="birthDateString"/></td>
             <td><xsl:value-of select="deathDateString"/></td>
             <td>
-                <img src="{coverImageUrl}" alt="{title}" style="max-height:100px;"/>
+                <img src="{coverImageUrl}" alt="{title}" style="width:100px;height:150px;" />
+            </td>
+            <td>
+                <a href="{wikipediaUrl}" target="_new"><button class="btn btn-primary" >View Author</button></a>
             </td>
         </tr>
     </xsl:template>

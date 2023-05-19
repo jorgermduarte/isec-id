@@ -33,8 +33,14 @@ public class XMLBookRepository implements IXMLRepository<Book> {
         if (book.getId() == null) {
             book.setId(generateId());
         }
-        books.add(book);
-        saveBooks();
+
+        // verify if we already have the book or not
+        // this way we will only save distinct books
+        Optional<Book> alreadyExists = this.books.stream().filter( a -> a.getIsbn().equals(book.getIsbn())).findFirst();
+        if(!alreadyExists.isPresent()){
+            books.add(book);
+            saveBooks();
+        }
         return book;
     }
 

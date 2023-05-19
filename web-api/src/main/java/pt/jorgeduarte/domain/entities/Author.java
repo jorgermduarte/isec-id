@@ -1,10 +1,10 @@
 package pt.jorgeduarte.domain.entities;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.*;
+
 import lombok.Getter;
 import lombok.Setter;
+import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 
 import java.util.List;
 @XmlRootElement
@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class Author {
 
-    private Long id;
+     private Long id;
 
     private String fullName;
 
@@ -27,6 +27,8 @@ public class Author {
 
     private String biography;
 
+    @XmlElementWrapper(name = "books")
+    @XmlElement(name = "book")
     private List<Book> books;
 
     private String coverImageUrl;

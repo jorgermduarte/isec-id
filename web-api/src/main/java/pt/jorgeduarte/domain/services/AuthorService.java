@@ -59,4 +59,7 @@ public class AuthorService {
         return xmlAuthorRepository.xPathFindAuthorsStillAlive();
     }
 
+    public Optional<Author> addBooksToAuthor(Long authorId, List<Book> books){
+        return xmlAuthorRepository.addBooksToAuthor(authorId,books);
+    }
 }
