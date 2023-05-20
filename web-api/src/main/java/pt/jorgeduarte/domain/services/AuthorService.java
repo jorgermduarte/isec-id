@@ -35,6 +35,10 @@ public class AuthorService {
         return xmlAuthorRepository.findById(id);
     }
 
+    public List<AuthorBooks> findAuthorWithBooksByFullName(String name) {
+        return xmlAggregationRepository.findAuthorsWithBooksByFullName(name);
+    }
+
     public Optional<Author> findAuthorByFullName(String name) {
         return xmlAuthorRepository.findAuthorByFullName(name);
     }

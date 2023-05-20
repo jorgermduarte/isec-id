@@ -58,6 +58,10 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
         return false;  // return false if no author was found with the given ID
     }
 
+    public List<AuthorBooks> findAuthorsWithBooksByFullName(String name){
+        return this.authorsBooks.stream().filter( a -> a.getFullName().toLowerCase().contains(name.toLowerCase())).toList();
+    }
+
     public AuthorBooks mapAuthorToAuthorBooks(Author author){
        AuthorBooks result = new AuthorBooks();
        result.setId(author.getId());
