@@ -11,6 +11,8 @@ import org.jsoup.select.Elements;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -26,8 +28,6 @@ public class WikipediaRegexService {
             Author authorObj = new Author();
             authorObj.setFullName(author);
             authorObj.setWikipediaUrl(url);
-
-            String content = doc.select("#bodyContent").text();
 
             String contentInfo = doc.select(".infobox").text();
 
@@ -60,7 +60,7 @@ public class WikipediaRegexService {
             }
 
             // Nationality
-            Pattern nationalityPattern = Pattern.compile("Nacionalidade\\s*([\\p{L}]+)");
+            Pattern nationalityPattern = Pattern.compile("Nacionalidade\\s*([\\p{L}-]+)");
             Matcher nationalityMatcher = nationalityPattern.matcher(contentInfo);
             if (nationalityMatcher.find()) {
                 authorObj.setNationality(nationalityMatcher.group(1).trim());
@@ -87,6 +87,57 @@ public class WikipediaRegexService {
             if (!filteredElements.isEmpty()) {
                 String imageUrl = filteredElements.get(0).absUrl("src");
                 authorObj.setCoverImageUrl(imageUrl);
+            }
+
+            Element infoBox = doc.select(".infobox_v2").first();
+
+            if(infoBox != null){
+                Elements rows = infoBox.select("tr");
+                for (Element row : rows) {
+                    Elements headerElements = row.select("td[scope=row]");
+                    if (!headerElements.isEmpty()) {
+                        String headerText = headerElements.first().text().trim();
+
+                        if (headerText.contains("Ocupação")) {
+                            Elements occupationElements = row.select("td").get(1).select("a");
+                            List<String> occupations = occupationElements.eachText();
+                            authorObj.setOccupations(occupations);
+                        }
+                        else if (headerText.contains("Prémios")) {
+                            String prizesText = row.select("td").get(1).ownText();
+                            Elements prizeLinkElements = row.select("td").get(1).select("a");
+
+                            List<String> prizes = new ArrayList<>();
+                            String[] prizesParts = prizesText.split(",");
+                            for (String prizePart : prizesParts) {
+                                String trimmedPrizePart = prizePart.trim();
+                                if (!trimmedPrizePart.isEmpty() && !trimmedPrizePart.startsWith("[") && !trimmedPrizePart.startsWith("(") && !trimmedPrizePart.isEmpty()) {
+                                    prizes.add(trimmedPrizePart);
+                                }
+                            }
+
+                            for (Element prizeElement : prizeLinkElements) {
+                                String trimmedText = prizeElement.text().trim();
+                                if(!trimmedText.startsWith("[") && !trimmedText.startsWith("(") && !trimmedText.isEmpty()){
+                                    prizes.add(trimmedText);
+                                }
+                            }
+
+                            authorObj.setPrizes(prizes);
+                        } else if (headerText.contains("Movimento literário")) {
+                            Elements genreElements = row.select("td").get(1).select("a");
+                            List<String> genre = genreElements.eachText();
+                            genre.removeIf(g -> g.isEmpty());
+
+                            authorObj.setLiteraryGenre(String.join(", ", genre));
+                        } else if (headerText.contains("Gênero literário")) {
+                            Elements genreElements = row.select("td").get(1).select("a");
+                            List<String> genres = genreElements.eachText();
+                            genres.removeIf(g -> g.isEmpty());
+                            authorObj.setLiteraryGenre(String.join(", ", genres));
+                        }
+                    }
+                }
             }
 
             return authorObj;

@@ -1,6 +1,4 @@
-
 # Tecnologias utilizadas no projeto:
-
 
 - [ ] **_JDOM??_** (JDOM é uma biblioteca Java para manipular documentos XML, ler escrever, nagvegar, alterar, e criar docs)
 - [x] XQuery
@@ -18,11 +16,3 @@
 - [x] XPATH
 - [x] SAXON  ( Saxon é uma implementação de XPath, XSLT e XQuery)
 
-# A fazer
-
-- [ ] escritores
-  - [ ] género literário onde se enquadra, 
-  - [ ] ocupações
-  - [ ] prémios
-- [ ] output
-  -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;

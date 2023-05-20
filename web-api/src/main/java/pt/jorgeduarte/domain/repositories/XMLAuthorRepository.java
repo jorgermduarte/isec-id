@@ -60,6 +60,9 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
                 author.setWikipediaUrl(updatedAuthor.getWikipediaUrl());
                 author.setBiography(updatedAuthor.getBiography());
                 author.setCoverImageUrl(updatedAuthor.getCoverImageUrl());
+                author.setOccupations(updatedAuthor.getOccupations());
+                author.setLiteraryGenre(updatedAuthor.getLiteraryGenre());
+                author.setPrizes(updatedAuthor.getPrizes());
                 saveAuthors();
                 return true;
             }
@@ -166,6 +169,35 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
                                     break;
                                 case "biography":
                                     author.setBiography(nodeValue);
+                                    break;
+                                case "literaryGenre":
+                                    author.setLiteraryGenre(nodeValue);
+                                    break;
+                                case "prizes":
+                                    List<String> prizes = new ArrayList<>();
+                                    for (XdmItem prizeItem : childNode.children()) {
+                                        if (prizeItem instanceof XdmNode) {
+                                            XdmNode prizeNode = (XdmNode) prizeItem;
+                                            String prize = prizeNode.getStringValue();
+                                            if(!prize.startsWith("\n")) {
+                                                prizes.add(prize);
+                                            }
+                                        }
+                                    }
+                                    author.setPrizes(prizes);
+                                    break;
+                                case "occupations":
+                                    List<String> occupations = new ArrayList<>();
+                                    for (XdmItem occupationItem : childNode.children()) {
+                                        if (occupationItem instanceof XdmNode) {
+                                            XdmNode occupationNode = (XdmNode) occupationItem;
+                                            String occupation = occupationNode.getStringValue();
+                                            if(!occupation.startsWith("\n")){
+                                                occupations.add(occupation);
+                                            }
+                                        }
+                                    }
+                                    author.setOccupations(occupations);
                                     break;
                             }
                             }catch(Exception ex){}

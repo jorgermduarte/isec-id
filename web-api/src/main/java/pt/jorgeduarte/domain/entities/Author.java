@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.*;
 
 import lombok.Getter;
 import lombok.Setter;
-import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 
 import java.util.List;
 @XmlRootElement
@@ -24,6 +23,16 @@ public class Author {
     private String nationality;
 
     private String wikipediaUrl;
+
+    @XmlElementWrapper(name = "occupations")
+    @XmlElement(name = "occupation")
+    private List<String> occupations;
+
+    @XmlElementWrapper(name = "prizes")
+    @XmlElement(name = "prize")
+    private List<String> prizes;
+
+    private String literaryGenre;
 
     private String biography;
 

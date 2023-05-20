@@ -292,6 +292,7 @@ public class XMLBookRepository implements IXMLRepository<Book> {
                                     case "price":
                                         book.setPrice(Double.parseDouble(nodeValue));
                                         break;
+
                                 }
                             }catch(Exception ex){}
                         }

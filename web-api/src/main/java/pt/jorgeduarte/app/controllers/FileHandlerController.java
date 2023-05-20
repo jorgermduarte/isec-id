@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.AuthorBooks;
+import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.AuthorService;
 import pt.jorgeduarte.domain.services.BookService;
 import pt.jorgeduarte.domain.services.FileReaderTxtService;
@@ -149,6 +150,22 @@ public class FileHandlerController {
         }
 
         return new ResponseEntity<>(result[0],HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/xml/expensiveBooks", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> getMostExpensiveBooksXml(@RequestParam int totalBooks) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(BookListWrapper.class);
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        BookListWrapper bookList = new BookListWrapper();
+
+        List<Book> expensiveBooks = bookService.xQueryGetXMostExpensiveBooks(totalBooks);
+
+        bookList.setBooks(expensiveBooks);
+
+        StringWriter xmlOutput = new StringWriter();
+        marshaller.marshal(bookList, xmlOutput);
+        return new ResponseEntity<>(xmlOutput.toString(), HttpStatus.OK);
     }
 
     private String getAuthorsAsXmlString() throws JAXBException {

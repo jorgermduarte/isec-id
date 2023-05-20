@@ -51,6 +51,9 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
                 author.setWikipediaUrl(updatedAuthor.getWikipediaUrl());
                 author.setBiography(updatedAuthor.getBiography());
                 author.setCoverImageUrl(updatedAuthor.getCoverImageUrl());
+                author.setOccupations(updatedAuthor.getOccupations());
+                author.setLiteraryGenre(updatedAuthor.getLiteraryGenre());
+                author.setPrizes(updatedAuthor.getPrizes());
                 saveAuthorsBooks();
                 return true;
             }
@@ -83,6 +86,9 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
        result.setBirthDateString(author.getBirthDateString());
        result.setWikipediaUrl(author.getWikipediaUrl());
        result.setDeathDateString(author.getDeathDateString());
+       result.setLiteraryGenre(author.getLiteraryGenre());
+       result.setOccupations(author.getOccupations());
+       result.setPrizes(author.getPrizes());
        return result;
     }
 
@@ -202,6 +208,35 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
                                         break;
                                     case "biography":
                                         author.setBiography(nodeValue);
+                                        break;
+                                    case "literaryGenre":
+                                        author.setLiteraryGenre(nodeValue);
+                                        break;
+                                    case "prizes":
+                                        List<String> prizes = new ArrayList<>();
+                                        for (XdmItem prizeItem : childNode.children()) {
+                                            if (prizeItem instanceof XdmNode) {
+                                                XdmNode prizeNode = (XdmNode) prizeItem;
+                                                String prize = prizeNode.getStringValue();
+                                                if(!prize.startsWith("\n")) {
+                                                    prizes.add(prize);
+                                                }
+                                            }
+                                        }
+                                        author.setPrizes(prizes);
+                                        break;
+                                    case "occupations":
+                                        List<String> occupations = new ArrayList<>();
+                                        for (XdmItem occupationItem : childNode.children()) {
+                                            if (occupationItem instanceof XdmNode) {
+                                                XdmNode occupationNode = (XdmNode) occupationItem;
+                                                String occupation = occupationNode.getStringValue();
+                                                if(!occupation.startsWith("\n")){
+                                                    occupations.add(occupation);
+                                                }
+                                            }
+                                        }
+                                        author.setOccupations(occupations);
                                         break;
                                     case "books":
                                         List<Book> authorBooks = new ArrayList<>();

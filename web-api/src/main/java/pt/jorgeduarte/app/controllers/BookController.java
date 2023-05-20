@@ -35,6 +35,7 @@ public class BookController {
     public Book getBookByID(@PathVariable Long id){
         return bookService.findBookById(id).orElseThrow(() -> new RuntimeException("Book not found!"));
     }
+
     @RequestMapping("/filter/{filterType}")
     public ResponseEntity<List<Book>> filterAuthors(@PathVariable String filterType, @RequestParam(required = false) String target) {
         List<Book> books;
@@ -122,4 +123,5 @@ public class BookController {
             return "The book does not exist";
         }
     }
+
 }
