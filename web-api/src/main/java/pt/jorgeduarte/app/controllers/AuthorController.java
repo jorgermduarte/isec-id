@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.jorgeduarte.domain.entities.Author;
+import pt.jorgeduarte.domain.entities.AuthorBooks;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.AuthorService;
 import pt.jorgeduarte.domain.services.BookService;
@@ -51,8 +52,8 @@ public class AuthorController {
     }
 
     @RequestMapping("/filter/{filterType}")
-    public ResponseEntity<List<Author>> filterAuthors(@PathVariable String filterType, @RequestParam(required = false) String target) {
-        List<Author> authors;
+    public ResponseEntity<List<?>> filterAuthors(@PathVariable String filterType, @RequestParam(required = false) String target) {
+        List<?> authors;
         switch (filterType) {
             case "bornBefore":
                 authors = authorService.xPathFindAuthorsBornBeforeDate(target);
@@ -92,7 +93,7 @@ public class AuthorController {
             for (String line : lines) {
                 Author author = wikipediaRegexService.fetchAuthorInfoWithRegex(line);
                 if(author == null || author.getBirthDateString() == null){
-                    response += "Author " + author.getFullName() + " not found! <br/>";
+                    response += "Author " + line + " not found! <br/>";
                 }else{
                     //check if author exists
                     if(authorService.findAuthorByFullName(author.getFullName()).isPresent()){
@@ -130,11 +131,6 @@ public class AuthorController {
 
     @RequestMapping("/{id}")
     public Author getAuthorInfo(@PathVariable Long id){
-      Author author = this.authorService.findAuthorById(id).orElseThrow(() -> new RuntimeException("Author not found!"));
-
-      // get author books
-      List<Book> books = bookService.getAuthorBooks(id);
-      author.setBooks(books);
-      return author;
+      return this.authorService.findAuthorById(id).orElseThrow(() -> new RuntimeException("Author not found!"));
     }
 }

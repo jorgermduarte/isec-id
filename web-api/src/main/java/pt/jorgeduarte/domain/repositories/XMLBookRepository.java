@@ -14,7 +14,10 @@ import javax.xml.bind.Unmarshaller;
 
 import net.sf.saxon.s9api.*;
 import org.springframework.stereotype.Repository;
+import pt.jorgeduarte.domain.entities.AuthorBooks;
 import pt.jorgeduarte.domain.entities.Book;
+import pt.jorgeduarte.domain.libs.XQueryVariable;
+import pt.jorgeduarte.domain.services.XQueryFileReaderService;
 import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 
 @Repository
@@ -209,6 +212,108 @@ public class XMLBookRepository implements IXMLRepository<Book> {
     public List<Book> xPathFindBooksByIsbn(String isbn) {
         return findBooksByXPathSaxon("//book[isbn='"+ isbn +"']");
     }
+
+    private List<Book> findBooksByXQuerySaxon(String xQueryString, List<XQueryVariable> variables ) {
+        List<Book> books = new ArrayList<>();
+        try {
+            // Create the output directory if it does not exist
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdir();
+            }
+
+            Processor processor = new Processor(false);
+            DocumentBuilder builder = processor.newDocumentBuilder();
+            XdmNode document = builder.build(new File(XML_FILE));
+
+            XQueryCompiler compiler = processor.newXQueryCompiler();
+            XQueryExecutable executable = compiler.compile(xQueryString);
+
+
+            XQueryEvaluator evaluator = executable.load();
+
+            // Set the external variables values
+            variables.forEach( v -> {
+                evaluator.setExternalVariable(new QName(v.getKey()), v.getValue());
+            });
+
+            evaluator.setContextItem(document);
+
+            // Iterate over all matches
+            for (XdmItem item : evaluator) {
+                if (item instanceof XdmNode) {
+                    XdmNode node = (XdmNode) item;
+                    Book book = new Book();
+                    // Iterate over all child elements of the node
+                    for (XdmItem child : node.children()) {
+                        if (child instanceof XdmNode) {
+                            XdmNode childNode = (XdmNode) child;
+                            try{
+                                String nodeName = childNode.getNodeName().getLocalName();
+                                String nodeValue = childNode.getStringValue();
+                                // Depending on the name of the node, set the appropriate field on the Book object
+                                switch (nodeName) {
+                                    case "id":
+                                        book.setId(Long.parseLong(nodeValue));
+                                        break;
+                                    case "title":
+                                        book.setTitle(nodeValue);
+                                        break;
+                                    case "authorId":
+                                        book.setAuthorId((Long.parseLong(nodeValue)));
+                                        break;
+                                    case "isbn":
+                                        book.setIsbn(nodeValue);
+                                        break;
+                                    case "publicationDateString":
+                                        book.setPublicationDateString(nodeValue);
+                                        break;
+                                    case "publisher":
+                                        book.setPublisher(nodeValue);
+                                        break;
+                                    case "language":
+                                        book.setLanguage(nodeValue);
+                                        break;
+                                    case "description":
+                                        book.setDescription(nodeValue);
+                                        break;
+                                    case "pages":
+                                        book.setPages((Long.parseLong(nodeValue)));
+                                        break;
+                                    case "bertrandUrl":
+                                        book.setBertrandUrl(nodeValue);
+                                        break;
+                                    case "coverImageUrl":
+                                        book.setCoverImageUrl(nodeValue);
+                                        break;
+                                }
+                            }catch(Exception ex){}
+                        }
+                    }
+                    books.add(book);
+                }
+            }
+        } catch (SaxonApiException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+        }
+
+        return books;
+    }
+
+    public List<Book> xQueryFindBooksByPublisher(String publisher){
+        String xQuery = XQueryFileReaderService.getXQueryFromFile("/xqueries/bookFilterByPublisher.xq");
+
+        XQueryVariable variable = new XQueryVariable();
+        variable.setKey("publisher");
+        variable.setStringValue(publisher);
+
+        ArrayList<XQueryVariable> variables = new ArrayList<>();
+        variables.add(variable);
+
+        return findBooksByXQuerySaxon(xQuery, variables);
+    }
+
 }
 
 

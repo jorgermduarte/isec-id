@@ -3,7 +3,9 @@ package pt.jorgeduarte.domain.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.jorgeduarte.domain.entities.Author;
+import pt.jorgeduarte.domain.entities.AuthorBooks;
 import pt.jorgeduarte.domain.entities.Book;
+import pt.jorgeduarte.domain.repositories.XMLAggregationRepository;
 import pt.jorgeduarte.domain.repositories.XMLAuthorRepository;
 
 import java.util.List;
@@ -14,9 +16,12 @@ public class AuthorService {
 
     private final XMLAuthorRepository xmlAuthorRepository;
 
+    private final XMLAggregationRepository xmlAggregationRepository;
+
     @Autowired
-    public AuthorService(XMLAuthorRepository xmlAuthorRepository) {
+    public AuthorService(XMLAuthorRepository xmlAuthorRepository, XMLAggregationRepository xmlAggregationRepository) {
         this.xmlAuthorRepository = xmlAuthorRepository;
+        this.xmlAggregationRepository = xmlAggregationRepository;
     }
 
     public Author saveAuthor(Author author) {
@@ -59,20 +64,20 @@ public class AuthorService {
         return xmlAuthorRepository.xPathFindAuthorsStillAlive();
     }
 
-    public Optional<Author> addBooksToAuthor(Long authorId, List<Book> books){
-        return xmlAuthorRepository.addBooksToAuthor(authorId,books);
+    public Optional<AuthorBooks> addBooksToAuthor(Author author, List<Book> books){
+        return xmlAggregationRepository.addBooksToAuthor(author,books);
     }
 
-    public List<Author> xQueryFindAuthorsWithMoreThanXBooks(int minimumBooks){
-        return xmlAuthorRepository.xQueryFindAuthorsWithMoreThanXBooks(minimumBooks);
+    public List<AuthorBooks> xQueryFindAuthorsWithMoreThanXBooks(int minimumBooks){
+        return xmlAggregationRepository.xQueryFindAuthorsWithMoreThanXBooks(minimumBooks);
     }
 
-    public List<Author> xQueryFindAuthorsWithNationality(String nationality){
-        return xmlAuthorRepository.xQueryFindAuthorsWithNationality(nationality);
+    public List<AuthorBooks> xQueryFindAuthorsWithNationality(String nationality){
+        return xmlAggregationRepository.xQueryFindAuthorsWithNationality(nationality);
     }
 
-    public List<Author> xQueryFindAuthorsWithBooksOfLanguage(String language){
-        return xmlAuthorRepository.xQueryFindAuthorsWithBooksOfLanguage(language);
+    public List<AuthorBooks> xQueryFindAuthorsWithBooksOfLanguage(String language){
+        return xmlAggregationRepository.xQueryFindAuthorsWithBooksOfLanguage(language);
     }
 
 }

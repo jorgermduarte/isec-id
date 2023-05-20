@@ -18,11 +18,18 @@ import java.net.URL;
 @RequestMapping("/entity/verify")
 public class EntityCheckController {
 
-    private final String xsdAuthorResourcePath = "/schemas/author.xsd";
+    private final String xsdAuthorResourcePath = "/schemas/author_books.xsd";
     private final String xmlAuthorOutputPath = "output/escritores.xml";
 
     private final String xsdBookResourcePath = "/schemas/book.xsd";
     private final String xmlBookOutputPath = "output/obras.xml";
+
+
+    private final String xsdAuthorBooksResourcePath = "/schemas/author_books.xsd";
+    private final String xmlAuthorBooksOutputPath = "output/aggregation.xml";
+
+
+
     AuthorService authorService;
 
     public EntityCheckController(AuthorService authorService) {
@@ -62,6 +69,26 @@ public class EntityCheckController {
             Schema schema = schemaFactory.newSchema(xsdFile);
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlBookOutputPath)));
+            return ResponseEntity.ok("O arquivo XML é válido de acordo com o schema.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O arquivo XML é inválido de acordo com o schema.");
+        }
+    }
+
+    @RequestMapping("/aggregation")
+    public ResponseEntity<String> verifyAggregationEntity() {
+        try {
+            URL xsdResourceUrl = getClass().getResource(xsdAuthorBooksResourcePath);
+            if (xsdResourceUrl == null) {
+                System.out.println("Não foi possível encontrar o arquivo XSD.");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível encontrar o arquivo XSD.");
+            }
+            File xsdFile = new File(xsdResourceUrl.toURI());
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = schemaFactory.newSchema(xsdFile);
+            Validator validator = schema.newValidator();
+            validator.validate(new StreamSource(new File(xmlAuthorBooksOutputPath)));
             return ResponseEntity.ok("O arquivo XML é válido de acordo com o schema.");
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,19 +1,18 @@
 package pt.jorgeduarte.domain.entities;
 
-import javax.xml.bind.annotation.*;
-
 import lombok.Getter;
 import lombok.Setter;
-import pt.jorgeduarte.domain.wrappers.BookListWrapper;
 
+import javax.xml.bind.annotation.*;
 import java.util.List;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Setter
-public class Author {
+public class AuthorBooks {
 
-     private Long id;
+    private Long id;
 
     private String fullName;
 
@@ -28,4 +27,9 @@ public class Author {
     private String biography;
 
     private String coverImageUrl;
+
+    @XmlElementWrapper(name = "books")
+    @XmlElement(name = "book")
+    private List<Book> books;
 }
+

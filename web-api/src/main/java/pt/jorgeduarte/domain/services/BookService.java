@@ -61,4 +61,9 @@ public class BookService {
     public List<Book> xPathFindBooksByIsbn(String isbn){
         return bookRepository.xPathFindBooksByIsbn(isbn);
     }
+
+    public List<Book> xQueryFindBooksByPublisher(String publisher){
+        return bookRepository.xQueryFindBooksByPublisher(publisher);
+    }
+
 }

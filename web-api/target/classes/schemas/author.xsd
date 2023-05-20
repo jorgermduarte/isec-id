@@ -18,31 +18,7 @@
             <xs:element name="nationality" type="xs:string" minOccurs="0" />
             <xs:element name="wikipediaUrl" type="xs:string" minOccurs="0"/>
             <xs:element name="biography" type="xs:string" minOccurs="0"/>
-            <xs:element name="books" minOccurs="0">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="book" type="Book" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="coverImageUrl" type="xs:string" minOccurs="0" />
         </xs:all>
     </xs:complexType>
-
-    <xs:complexType name="Book">
-        <xs:all>
-            <xs:element name="id" type="xs:long"/>
-            <xs:element name="title" type="xs:string"/>
-            <xs:element name="authorId" type="xs:long"/>
-            <xs:element name="isbn" type="xs:string"/>
-            <xs:element name="publicationDateString" type="xs:string"/>
-            <xs:element name="publisher" type="xs:string"  minOccurs="0" />
-            <xs:element name="language" type="xs:string"  minOccurs="0" />
-            <xs:element name="description" type="xs:string"/>
-            <xs:element name="pages" type="xs:int"  minOccurs="0" />
-            <xs:element name="bertrandUrl" type="xs:string"/>
-            <xs:element name="coverImageUrl" type="xs:string"  minOccurs="0" />
-        </xs:all>
-    </xs:complexType>
-
 </xs:schema>

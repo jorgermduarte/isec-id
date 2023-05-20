@@ -20,7 +20,15 @@
 
 # A fazer
 
-- [ ] ler requisitos do trabalho a ver se falta alguma coisa
-- [ ] dado o trabalho prático será que faz sentido em vez de andar a retornar json, retornar tudo em xml?
-  - pesquisas de autores e livros por id
-  - filtros de pesquisas
+- [ ] escritores
+  - [ ] género literário onde se enquadra, 
+  - [ ] ocupações
+  - [ ] prémios
+  - [ ] eliminar/editar
+- [ ] livros
+  - [ ] preço
+  - [ ] xquery por preço minimo
+- [ ] output
+  -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 
+  -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;
+  -  [ ] Indicar o nome de um autor e gerar ficheiro HTML de fotos das capas dos livros desse autor

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.AuthorService;
 import pt.jorgeduarte.domain.services.BertrandJdomService;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -55,6 +57,9 @@ public class BookController {
             case "pages":
                 books = bookService.xPathFindBooksByNumberOfPages(Long.valueOf(target));
                 break;
+            case "publisher":
+                books = bookService.xQueryFindBooksByPublisher(target);
+                break;
             default:
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -84,12 +89,22 @@ public class BookController {
 
     @RequestMapping("/author/{authorId}/sync")
     public String syncAuthorBooks(@PathVariable Long authorId) {
-        List<Book> books = bertrandJsonService.fetchBooksFromAuthor(authorId);
-        bookService.saveAll(books);
 
-        //update the books of the author
-        authorService.addBooksToAuthor(authorId,books);
+        // get author information
+        Optional<Author> author = authorService.findAuthorById(authorId);
 
-        return "Synced " + books.size() + " books from author id: " + authorId;
+        if(author.isPresent()){
+            List<Book> books = bertrandJsonService.fetchBooksFromAuthor(authorId);
+            bookService.saveAll(books);
+
+            //update the books of the author
+            authorService.addBooksToAuthor(author.get(),books);
+
+            return "Sync completed for  " + books.size() + " books from author id: " + authorId;
+
+        }else{
+            return "Couldn't find any author with the id: " + authorId;
+        }
     }
+
 }
