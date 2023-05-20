@@ -180,6 +180,9 @@ public class XMLBookRepository implements IXMLRepository<Book> {
                                     case "coverImageUrl":
                                         book.setCoverImageUrl(nodeValue);
                                         break;
+                                    case "price":
+                                        book.setPrice(Double.parseDouble(nodeValue));
+                                        break;
                                 }
                             }catch(Exception ex){}
                         }
@@ -286,6 +289,9 @@ public class XMLBookRepository implements IXMLRepository<Book> {
                                     case "coverImageUrl":
                                         book.setCoverImageUrl(nodeValue);
                                         break;
+                                    case "price":
+                                        book.setPrice(Double.parseDouble(nodeValue));
+                                        break;
                                 }
                             }catch(Exception ex){}
                         }
@@ -313,6 +319,33 @@ public class XMLBookRepository implements IXMLRepository<Book> {
 
         return findBooksByXQuerySaxon(xQuery, variables);
     }
+
+    public List<Book> xQueryFindBooksWithMaxPrice(Double maxPrice){
+        String xQuery = XQueryFileReaderService.getXQueryFromFile("/xqueries/booksWithMaxPrice.xq");
+
+        XQueryVariable variable = new XQueryVariable();
+        variable.setKey("maxPrice");
+        variable.setDoubleValue(maxPrice);
+
+        ArrayList<XQueryVariable> variables = new ArrayList<>();
+        variables.add(variable);
+
+        return findBooksByXQuerySaxon(xQuery, variables);
+    }
+
+    public List<Book> xQueryGetXMostExpensiveBooks(int numberOfBooks){
+        String xQuery = XQueryFileReaderService.getXQueryFromFile("/xqueries/getXbooksMostExpensive.xq");
+
+        XQueryVariable variable = new XQueryVariable();
+        variable.setKey("numberOfBooks");
+        variable.setIntValue(numberOfBooks);
+
+        ArrayList<XQueryVariable> variables = new ArrayList<>();
+        variables.add(variable);
+
+        return findBooksByXQuerySaxon(xQuery, variables);
+    }
+
 
 }
 

@@ -66,4 +66,12 @@ public class BookService {
         return bookRepository.xQueryFindBooksByPublisher(publisher);
     }
 
+    public List<Book> xQueryFindBooksWithMaxPrice(Double maxPrice){
+        return bookRepository.xQueryFindBooksWithMaxPrice(maxPrice);
+    }
+
+    public List<Book> xQueryGetXMostExpensiveBooks(int numberOfBooks){
+        return bookRepository.xQueryGetXMostExpensiveBooks(numberOfBooks);
+    }
+
 }

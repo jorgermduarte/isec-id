@@ -91,6 +91,14 @@ public class BertrandJdomService {
             // Capa do livro (imagem)
             String coverUrl = document.select("#productPageLeftSectionTop-images picture img").attr("src");
 
+            // preço do item
+            String itemPriceString = document.select("#productPageRightSectionTop-saleAction-price-current").text();
+            Double itemPrice = 0.0;
+            if(!itemPriceString.isEmpty()){
+                itemPriceString = itemPriceString.replace("€","").replace(",",".");
+                itemPrice = Double.parseDouble(itemPriceString);
+            }
+
             book.setDescription(synopsis);
             book.setPublicationDateString(publicationDateString);
             book.setTitle(title);
@@ -101,6 +109,10 @@ public class BertrandJdomService {
             book.setPages(pages);
             book.setBertrandUrl(bookUrl);
             book.setCoverImageUrl(coverUrl);
+
+            if(itemPrice > 0){
+                book.setPrice(itemPrice);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

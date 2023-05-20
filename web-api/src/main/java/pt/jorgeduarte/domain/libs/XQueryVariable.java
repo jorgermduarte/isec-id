@@ -20,4 +20,8 @@ public class XQueryVariable{
     public void setStringValue(String value){
         this.value = new XdmAtomicValue(value);
     }
+
+    public void setDoubleValue(Double value){
+        this.value = new XdmAtomicValue(value);
+    }
 }

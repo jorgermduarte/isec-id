@@ -27,6 +27,8 @@ public class Book {
 
     private String description;
 
+    private Double price;
+
     private Long pages;
 
     private String bertrandUrl;

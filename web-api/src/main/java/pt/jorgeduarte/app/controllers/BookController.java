@@ -60,6 +60,12 @@ public class BookController {
             case "publisher":
                 books = bookService.xQueryFindBooksByPublisher(target);
                 break;
+            case "maxPrice":
+                books = bookService.xQueryFindBooksWithMaxPrice(Double.valueOf(target));
+                break;
+            case "mostExpensive":
+                books = bookService.xQueryGetXMostExpensiveBooks(Integer.parseInt(target));
+                break;
             default:
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

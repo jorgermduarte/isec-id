@@ -25,8 +25,7 @@
   - [ ] ocupações
   - [ ] prémios
 - [ ] livros
-  - [ ] preço
-  - [ ] xquery por preço minimo
+
   - [ ] editar/eliminar + sync? faz sentido?
 - [ ] output
   -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 

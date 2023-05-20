@@ -240,6 +240,9 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
                                                                 case "coverImageUrl":
                                                                     book.setCoverImageUrl(bookNodeValue);
                                                                     break;
+                                                                case "price":
+                                                                    book.setPrice(Double.parseDouble(nodeValue));
+                                                                    break;
                                                             }
                                                         }catch(Exception ex){}
                                                     }
