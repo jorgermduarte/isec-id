@@ -57,6 +57,17 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
         }
         return false;  // return false if no author was found with the given ID
     }
+    public void deleteBookById(Long bookId){
+        this.authorsBooks.forEach( ab -> {
+            List<Book> currentBooks = ab.getBooks();
+
+            if(currentBooks != null){
+                currentBooks.removeIf( b -> b.getId().equals(bookId));
+                ab.setBooks(currentBooks);
+            }
+        });
+        saveAuthorsBooks();
+    }
 
     public List<AuthorBooks> findAuthorsWithBooksByFullName(String name){
         return this.authorsBooks.stream().filter( a -> a.getFullName().toLowerCase().contains(name.toLowerCase())).toList();

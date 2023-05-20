@@ -24,9 +24,6 @@
   - [ ] género literário onde se enquadra, 
   - [ ] ocupações
   - [ ] prémios
-- [ ] livros
-
-  - [ ] editar/eliminar + sync? faz sentido?
 - [ ] output
   -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 
   -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;

@@ -4,10 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.Book;
 import pt.jorgeduarte.domain.services.AuthorService;
@@ -113,4 +110,16 @@ public class BookController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteBookById(@PathVariable Long id){
+        Optional<Book> current = bookService.findBookById(id);
+
+        if(current.isPresent()){
+            boolean status =  bookService.deleteBookById(id);
+            return "Book Deleted Successfully";
+
+        }else{
+            return "The book does not exist";
+        }
+    }
 }

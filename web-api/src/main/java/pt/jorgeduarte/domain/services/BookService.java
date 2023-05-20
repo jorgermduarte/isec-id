@@ -1,6 +1,7 @@
 package pt.jorgeduarte.domain.services;
 
 import pt.jorgeduarte.domain.entities.Book;
+import pt.jorgeduarte.domain.repositories.XMLAggregationRepository;
 import pt.jorgeduarte.domain.repositories.XMLBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,12 @@ import java.util.Optional;
 public class BookService {
     private final XMLBookRepository bookRepository;
 
+    private final XMLAggregationRepository aggregationRepository;
+
     @Autowired
-    public BookService(XMLBookRepository bookRepository) {
+    public BookService(XMLBookRepository bookRepository,XMLAggregationRepository aggregationRepository) {
         this.bookRepository = bookRepository;
+        this.aggregationRepository = aggregationRepository;
     }
 
     public Book saveBook(Book book) {
@@ -27,6 +31,7 @@ public class BookService {
         return books;
     }
 
+
     public Optional<Book> findBookById(Long id) {
         return bookRepository.findById(id);
     }
@@ -39,8 +44,10 @@ public class BookService {
         return bookRepository.getAuthorBooks(authorId);
     }
 
-    public void deleteBookById(Long id) {
+    public Boolean deleteBookById(Long id) {
+        aggregationRepository.deleteBookById(id);
         bookRepository.deleteById(id);
+        return true;
     }
 
     public List<Book> xPathFindBooksByTitle(String title) {
