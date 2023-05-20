@@ -7,7 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pt.jorgeduarte.domain.entities.Author;
 import pt.jorgeduarte.domain.entities.AuthorBooks;
 import pt.jorgeduarte.domain.services.AuthorService;
 import pt.jorgeduarte.domain.services.BookService;
@@ -27,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -125,6 +128,27 @@ public class FileHandlerController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @RequestMapping("/txt/authors")
+    public ResponseEntity<String> getAllAuthorsOnTxt(@RequestParam(required = false) boolean saveFile){
+        final String[] result = {""};
+
+        List<Author> authors = authorService.findAllAuthors();
+
+        if(authors != null){
+            authors.forEach( a -> {
+                result[0] = result[0] + a.getFullName() + "<br/>";
+            });
+        }
+
+        if(saveFile){
+            String outputFile = result[0].replaceAll("<br/>","\n");
+            fileReaderService.saveTextFile("current_authors.txt",outputFile);
+        }
+
+        return new ResponseEntity<>(result[0],HttpStatus.OK);
     }
 
     private String getAuthorsAsXmlString() throws JAXBException {

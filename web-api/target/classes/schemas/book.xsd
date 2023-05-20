@@ -15,7 +15,7 @@
                             <xs:element name="language" type="xs:string"  minOccurs="0" />
                             <xs:element name="description" type="xs:string"/>
                             <xs:element name="pages" type="xs:int"  minOccurs="0" />
-                            <xs:element name="price" type="xs:long" minOccurs="0" />
+                            <xs:element name="price" type="xs:double" minOccurs="0" />
                             <xs:element name="bertrandUrl" type="xs:string"/>
                             <xs:element name="coverImageUrl" type="xs:string"  minOccurs="0" />
                         </xs:all>

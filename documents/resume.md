@@ -25,5 +25,4 @@
   - [ ] ocupações
   - [ ] prémios
 - [ ] output
-  -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 
   -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;
