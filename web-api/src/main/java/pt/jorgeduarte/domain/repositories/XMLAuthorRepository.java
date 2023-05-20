@@ -53,7 +53,6 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
     public boolean updateAuthorById(Long authorId, Author updatedAuthor){
         for (Author author : this.authors) {
             if(author.getId().equals(authorId)){
-                author.setId(updatedAuthor.getId());
                 author.setFullName(updatedAuthor.getFullName());
                 author.setBirthDateString(updatedAuthor.getBirthDateString());
                 author.setDeathDateString(updatedAuthor.getDeathDateString());

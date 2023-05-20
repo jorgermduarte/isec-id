@@ -39,6 +39,25 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
         return author;
     }
 
+    public boolean updateAuthorById(long authorId, Author updated){
+        AuthorBooks updatedAuthor = this.mapAuthorToAuthorBooks(updated);
+
+        for (AuthorBooks author : this.authorsBooks) {
+            if(author.getId().equals(authorId)){
+                author.setFullName(updatedAuthor.getFullName());
+                author.setBirthDateString(updatedAuthor.getBirthDateString());
+                author.setDeathDateString(updatedAuthor.getDeathDateString());
+                author.setNationality(updatedAuthor.getNationality());
+                author.setWikipediaUrl(updatedAuthor.getWikipediaUrl());
+                author.setBiography(updatedAuthor.getBiography());
+                author.setCoverImageUrl(updatedAuthor.getCoverImageUrl());
+                saveAuthorsBooks();
+                return true;
+            }
+        }
+        return false;  // return false if no author was found with the given ID
+    }
+
     public AuthorBooks mapAuthorToAuthorBooks(Author author){
        AuthorBooks result = new AuthorBooks();
        result.setId(author.getId());
@@ -244,19 +263,6 @@ public class XMLAggregationRepository implements IXMLRepository<AuthorBooks> {
     }
 
     public Optional<AuthorBooks> addBooksToAuthor(Author author, List<Book> books){
-        //check if there's an author already
-        Optional<AuthorBooks> authorAlreadyExists = this.findById(author.getId());
-
-        if(authorAlreadyExists.isPresent()){
-            this.authorsBooks.forEach(a -> {
-                if(a.getId() == author.getId()){
-                    a = this.mapAuthorToAuthorBooks(author);
-                }
-            });
-        }else{
-            this.authorsBooks.add(this.mapAuthorToAuthorBooks(author));
-        }
-
         this.authorsBooks.forEach( a -> {
             if(a.getId().equals(author.getId())){
 

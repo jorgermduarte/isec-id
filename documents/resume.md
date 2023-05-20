@@ -27,8 +27,7 @@
 - [ ] livros
   - [ ] preço
   - [ ] xquery por preço minimo
-- [ ] aggregation
-  - [ ] fix das changes nos autores/livros automaticamente atualizar as aggregations
+  - [ ] editar/eliminar + sync? faz sentido?
 - [ ] output
   -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 
   -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;

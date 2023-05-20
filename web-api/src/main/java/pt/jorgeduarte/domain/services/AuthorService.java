@@ -25,7 +25,10 @@ public class AuthorService {
     }
 
     public Author saveAuthor(Author author) {
-        return xmlAuthorRepository.save(author);
+        Author savedAuthor = xmlAuthorRepository.save(author);
+        xmlAggregationRepository.save(xmlAggregationRepository.mapAuthorToAuthorBooks(author));
+
+        return savedAuthor;
     }
 
     public Optional<Author> findAuthorById(Long id) {
@@ -41,6 +44,7 @@ public class AuthorService {
     }
 
     public void deleteAuthorById(Long id) {
+        xmlAggregationRepository.deleteById(id);
         xmlAuthorRepository.deleteById(id);
     }
 
@@ -81,6 +85,7 @@ public class AuthorService {
     }
 
     public boolean updateAuthorById(Long authorId, Author author){
+        this.xmlAggregationRepository.updateAuthorById(authorId,author);
         return this.xmlAuthorRepository.updateAuthorById(authorId,author);
     }
 
