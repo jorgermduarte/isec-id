@@ -1,5 +1,6 @@
 package pt.jorgeduarte.app.controllers;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/authors")
@@ -127,6 +129,32 @@ public class AuthorController {
             authorService.saveAuthor(author);
             return ResponseEntity.ok("Author " + author.getFullName() + " synced with success!");
         }
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody Author author){
+        Optional<Author> current = this.authorService.findAuthorById(id);
+
+        if(current.isPresent()){
+            this.authorService.updateAuthorById(id,author);
+            return new ResponseEntity<>(this.authorService.findAuthorById(id).get(),HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAuthorById(@PathVariable Long id){
+        Optional<Author> current = this.authorService.findAuthorById(id);
+
+        if(current.isPresent()){
+            this.authorService.deleteAuthorById(id);
+            return new ResponseEntity<>("Author deleted successfully", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("The author that you're trying to delete does not exist",HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @RequestMapping("/{id}")

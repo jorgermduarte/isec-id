@@ -24,10 +24,11 @@
   - [ ] género literário onde se enquadra, 
   - [ ] ocupações
   - [ ] prémios
-  - [ ] eliminar/editar
 - [ ] livros
   - [ ] preço
   - [ ] xquery por preço minimo
+- [ ] aggregation
+  - [ ] fix das changes nos autores/livros automaticamente atualizar as aggregations
 - [ ] output
   -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 
   -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;

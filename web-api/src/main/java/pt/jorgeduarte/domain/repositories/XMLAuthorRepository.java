@@ -50,6 +50,24 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
         saveAuthors();
     }
 
+    public boolean updateAuthorById(Long authorId, Author updatedAuthor){
+        for (Author author : this.authors) {
+            if(author.getId().equals(authorId)){
+                author.setId(updatedAuthor.getId());
+                author.setFullName(updatedAuthor.getFullName());
+                author.setBirthDateString(updatedAuthor.getBirthDateString());
+                author.setDeathDateString(updatedAuthor.getDeathDateString());
+                author.setNationality(updatedAuthor.getNationality());
+                author.setWikipediaUrl(updatedAuthor.getWikipediaUrl());
+                author.setBiography(updatedAuthor.getBiography());
+                author.setCoverImageUrl(updatedAuthor.getCoverImageUrl());
+                saveAuthors();
+                return true;
+            }
+        }
+        return false;  // return false if no author was found with the given ID
+    }
+
     private void loadAuthors() {
         try {
             // Create the output directory if it does not exist

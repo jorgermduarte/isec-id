@@ -80,4 +80,8 @@ public class AuthorService {
         return xmlAggregationRepository.xQueryFindAuthorsWithBooksOfLanguage(language);
     }
 
+    public boolean updateAuthorById(Long authorId, Author author){
+        return this.xmlAuthorRepository.updateAuthorById(authorId,author);
+    }
+
 }
