@@ -31,4 +31,3 @@
 - [ ] output
   -  [ ] Gerar ficheiro TXT que mostre a listagem de todos os autores 
   -  [ ] Gerar um ficheiro XML com informação dos 5 livros mais caros;
-  -  [ ] Indicar o nome de um autor e gerar ficheiro HTML de fotos das capas dos livros desse autor
