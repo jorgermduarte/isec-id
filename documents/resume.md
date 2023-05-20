@@ -20,8 +20,6 @@
 
 # A fazer
 
-- [ ] adicionar documentação Postman
-  - [ ] isto vai facilitar na defesa mostrando de forma clara todos os métodos existentes e o que é possivel fazer no projeto
 - [ ] ler requisitos do trabalho a ver se falta alguma coisa
 - [ ] dado o trabalho prático será que faz sentido em vez de andar a retornar json, retornar tudo em xml?
   - pesquisas de autores e livros por id
