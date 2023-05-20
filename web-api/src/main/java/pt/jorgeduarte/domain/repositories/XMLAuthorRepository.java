@@ -232,4 +232,25 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
         return findAuthorsByXPathSaxon("//author[not(exists(deathDateString))]");
     }
 
+    public List<Author> findAuthorsByOccupation(String occupation){
+        return findAuthorsByXPathSaxon("//author[occupations/occupation='" + occupation + "']");
+    }
+
+    public List<Author> findAuthorsByLiteraryGenre(String genre){
+        return findAuthorsByXPathSaxon("//author[literaryGenre='" + genre + "']");
+    }
+
+    public List<Author> findTopXAuthorsWithMostPrizes(int x){
+        // Get all authors
+        List<Author> authors = findAuthorsByXPathSaxon("//author");
+
+        authors.removeIf( a -> a.getPrizes() == null);
+        // Sort authors by the number of prizes
+        authors.sort((a1, a2) -> Integer.compare(a2.getPrizes().size(), a1.getPrizes().size()));
+
+        // Get top x authors
+        return authors.subList(0, Math.min(x, authors.size()));
+    }
+
+
 }

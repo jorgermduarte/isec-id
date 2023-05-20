@@ -93,4 +93,18 @@ public class AuthorService {
         return this.xmlAuthorRepository.updateAuthorById(authorId,author);
     }
 
+    public List<Author> findAuthorsByOccupation(String occupation){
+        return xmlAuthorRepository.findAuthorsByOccupation(occupation);
+    }
+
+    public List<Author> findAuthorsByLiteraryGenre(String genre){
+        return xmlAuthorRepository.findAuthorsByLiteraryGenre(genre);
+    }
+
+    public List<Author> findTopXAuthorsWithMostPrizes(int x){
+        return xmlAuthorRepository.findTopXAuthorsWithMostPrizes(x);
+    }
+
+
+
 }

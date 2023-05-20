@@ -78,6 +78,15 @@ public class AuthorController {
             case "nationality":
                 authors = authorService.xQueryFindAuthorsWithNationality(target);
                 break;
+            case "occupation":
+                authors = authorService.findAuthorsByOccupation(target);
+                break;
+            case "literaryGenre":
+                authors = authorService.findAuthorsByLiteraryGenre(target);
+                break;
+            case "mostPrizes":
+                authors = authorService.findTopXAuthorsWithMostPrizes(Integer.parseInt(target));
+                break;
             default:
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
