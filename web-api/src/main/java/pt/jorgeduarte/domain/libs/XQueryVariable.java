@@ -1,6 +1,5 @@
 package pt.jorgeduarte.domain.libs;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import net.sf.saxon.s9api.XdmAtomicValue;
@@ -15,6 +14,10 @@ public class XQueryVariable{
 
 
     public void setIntValue(int value){
+        this.value = new XdmAtomicValue(value);
+    }
+
+    public void setStringValue(String value){
         this.value = new XdmAtomicValue(value);
     }
 }

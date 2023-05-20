@@ -67,4 +67,12 @@ public class AuthorService {
         return xmlAuthorRepository.xQueryFindAuthorsWithMoreThanXBooks(minimumBooks);
     }
 
+    public List<Author> xQueryFindAuthorsWithNationality(String nationality){
+        return xmlAuthorRepository.xQueryFindAuthorsWithNationality(nationality);
+    }
+
+    public List<Author> xQueryFindAuthorsWithBooksOfLanguage(String language){
+        return xmlAuthorRepository.xQueryFindAuthorsWithBooksOfLanguage(language);
+    }
+
 }

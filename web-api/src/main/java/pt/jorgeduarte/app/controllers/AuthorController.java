@@ -69,6 +69,12 @@ public class AuthorController {
             case "minimumBooks":
                 authors = authorService.xQueryFindAuthorsWithMoreThanXBooks(Integer.parseInt(target));
                 break;
+            case "booksLanguage":
+                authors = authorService.xQueryFindAuthorsWithBooksOfLanguage(target);
+                break;
+            case "nationality":
+                authors = authorService.xQueryFindAuthorsWithNationality(target);
+                break;
             default:
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

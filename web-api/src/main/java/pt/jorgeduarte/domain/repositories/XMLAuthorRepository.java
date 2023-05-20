@@ -403,7 +403,7 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
             }
         });
         saveAuthors();
-        return this.authors.stream().filter( a -> a.getId() == authorId).findFirst();
+        return this.authors.stream().filter( a -> a.getId().equals(authorId)).findFirst();
     }
 
     public List<Author> xQueryFindAuthorsWithMoreThanXBooks(int minimumBooks){
@@ -416,10 +416,33 @@ public class XMLAuthorRepository implements IXMLRepository<Author> {
         ArrayList<XQueryVariable> variables = new ArrayList<>();
         variables.add(minBooks);
 
-        List<Author> authorsResponse = findAuthorsByXQuerySaxon(xQuery, variables);
+        return  findAuthorsByXQuerySaxon(xQuery, variables);
+    }
 
+    public List<Author> xQueryFindAuthorsWithNationality(String nationality){
+        String xQuery = XQueryFileReaderService.getXQueryFromFile("/xqueries/authorsByNationality.xq");
 
-        return authorsResponse;
+        XQueryVariable variable = new XQueryVariable();
+        variable.setKey("nationality");
+        variable.setStringValue(nationality);
+
+        ArrayList<XQueryVariable> variables = new ArrayList<>();
+        variables.add(variable);
+
+        return findAuthorsByXQuerySaxon(xQuery, variables);
+    }
+
+    public List<Author> xQueryFindAuthorsWithBooksOfLanguage(String language){
+        String xQuery = XQueryFileReaderService.getXQueryFromFile("/xqueries/authorsWithBooksOfOneLanguage.xq");
+
+        XQueryVariable variable = new XQueryVariable();
+        variable.setKey("language");
+        variable.setStringValue(language);
+
+        ArrayList<XQueryVariable> variables = new ArrayList<>();
+        variables.add(variable);
+
+        return findAuthorsByXQuerySaxon(xQuery, variables);
     }
 
 
