@@ -1,0 +1,887 @@
+{
+	"info": {
+		"_postman_id": "0658017a-595f-41c9-8b83-d099b8830d27",
+		"name": "ISEC - ID",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2101514"
+	},
+	"item": [
+		{
+			"name": "entity",
+			"item": [
+				{
+					"name": "[xsd] validate books file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/entity/verify/book",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"entity",
+								"verify",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[xsd] validate author file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/entity/verify/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"entity",
+								"verify",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[xsd] validate aggregation file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/entity/verify/aggregation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"entity",
+								"verify",
+								"aggregation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authors",
+			"item": [
+				{
+					"name": "filter",
+					"item": [
+						{
+							"name": "[xquery] Filter authors by minimum Books",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/minimumBooks?target=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"minimumBooks"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors by biography",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/bioContains?target=Academia%20Brasileira",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"bioContains"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Academia%20Brasileira"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors passed away",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/passedAway",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"passedAway"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors born before",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/bornBefore?target=1888-06-13",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"bornBefore"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "1888-06-13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors still alive",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/stillAlive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"stillAlive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xquery] Filter authors by booksLanguage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/booksLanguage?target=Português",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"booksLanguage"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Português"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xquery] Filter authors by nationality",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/nationality?target=norte-americano",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"nationality"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "norte-americano"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors with a given occupation",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/occupation?target=Escritor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"occupation"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Escritor"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors with a given literaryGenre",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/literaryGenre?target=Modernismo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"literaryGenre"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Modernismo"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] Filter authors with mostPrizes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/authors/filter/mostPrizes?target=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"authors",
+										"filter",
+										"mostPrizes"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all authors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/authors/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sync a new author by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/authors/Fernando%20Pessoa/sync",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authors",
+								"Fernando%20Pessoa",
+								"sync"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sync all authors in file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/authors/sync",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authors",
+								"sync"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"fullName\": \"Fernando Pessoa\",\r\n    \"birthDateString\": \"1888-06-13\",\r\n    \"deathDateString\": \"1935-11-30\",\r\n    \"nationality\": \"Português\",\r\n    \"wikipediaUrl\": \"https://pt.wikipedia.org/wiki/Fernando_Pessoa\",\r\n    \"occupations\": [\r\n        \"Poeta\",\r\n        \"escritor\",\r\n        \"tradutor\"\r\n    ],\r\n    \"prizes\": [\r\n        \"Queen Victoria Prize (1903)\",\r\n        \"Prémio Antero de Quental\"\r\n    ],\r\n    \"literaryGenre\": \"Modernismo\",\r\n    \"biography\": \"Fernando António Nogueira Pessoa (Lisboa, Mártires, 13 de junho de 1888 – Lisboa, Santa Catarina, 30 de novembro de 1935) foi um poeta, filósofo, dramaturgo, ensaísta, tradutor, publicitário, astrólogo, inventor, empresário, correspondente comercial, crítico literário e comentarista político português.\\nFernando Pessoa é o mais universal poeta português. Por ter sido educado na África do Sul, numa escola católica irlandesa de Durban, chegou a ter maior familiaridade com o idioma inglês do que com o português ao escrever os seus primeiros poemas nesse idioma. O crítico literário Harold Bloom considerou Pessoa como \\\"Whitman renascido\\\", e o incluiu no seu cânone entre os 26 melhores escritores da civilização ocidental, não apenas da literatura portuguesa mas também da inglesa.\\nDas quatro obras que publicou em vida, três são na língua inglesa e apenas uma em língua portuguesa, intitulada Mensagem. Fernando Pessoa traduziu várias obras em inglês (e.g., de Shakespeare e Edgar Allan Poe) para o português, e obras portuguesas (nomeadamente de António Botto e Almada Negreiros) para o inglês e o francês.\\nEnquanto poeta, escreveu sob diversas personalidades – a que ele próprio chamou heterónimos, como Ricardo Reis, Álvaro de Campos e Alberto Caeiro –, sendo estes últimos objeto da maior parte dos estudos sobre a sua vida e obra. Robert Hass, poeta americano, diz: \\\"outros modernistas como Yeats, Pound, Eliot inventaram máscaras pelas quais falavam ocasionalmente… Pessoa inventava poetas inteiros\\\". Buscou também inspirações nas obras dos poetas William Wordsworth, James Joyce e Walt Whitman.\\nA 13 de junho de 1888, pelas 15h20, nasceu Fernando Pessoa. O parto ocorreu no quarto andar esquerdo do n.º 4 do Largo de São Carlos, em frente à ópera de Lisboa (Teatro de São Carlos), freguesia dos Mártires. De famílias da pequena aristocracia, pelos lados paterno e materno, o pai, Joaquim de Seabra Pessoa (38), natural de Lisboa, era funcionário público do Ministério da Justiça e crítico musical do «Diário de Notícias». A mãe, D. Maria Magdalena Pinheiro Nogueira Pessoa (26), era natural dos Açores (mais propriamente, da Ilha Terceira). Viviam com eles a avó Dionísia, doente mental, e as suas duas criadas, Joana e Emília.\\nO poeta, pelo lado paterno, tem as suas raízes familiares no concelho de Arouca, nas freguesias do denominado «Fundo do Concelho» de Arouca.\\nFernando António foi baptizado em 21 de julho na Basílica dos Mártires, ao Chiado, tendo por padrinhos a Tia Anica (D. Ana Luísa Pinheiro Nogueira, tia materna) e o General Chaby. A escolha do nome homenageia Santo António: a família reclamava uma ligação genealógica com Fernando de Bulhões, nome de baptismo de Santo António, tradicionalmente festejado em Lisboa a 13 de Junho, dia em que Fernando Pessoa nasceu.\\nA sua infância e adolescência foram marcadas por factos que o influenciariam posteriormente. Às cinco horas da manhã de 13 de Julho de 1893, o seu pai morreu, com 43 anos, vítima de tuberculose. A morte foi anunciada no Diário de Notícias do dia. Fernando tinha apenas cinco anos. O irmão Jorge viria a falecer no ano seguinte, sem completar um ano, a 2 de Janeiro de 1894. A mãe vê-se obrigada a leiloar parte da mobília e muda-se para uma casa mais modesta, o terceiro andar do n.º 104 da Rua de São Marçal. Foi também neste período que surgiu o primeiro heterónimo de Fernando Pessoa, Chevalier de Pas, facto relatado pelo próprio a Adolfo Casais Monteiro, numa carta de 1935, em que fala extensamente sobre a origem dos heterónimos. Ainda no mesmo ano, escreve o primeiro poema, um verso curto com a infantil epígrafe de À Minha Querida Mamã.\\nEm outubro de 1894, o comandante João Miguel Rosa (1857-1919) apaixona-se por Maria Madalena ao vê-la passar dentro de um \\\"americano\\\", numa rua de Lisboa, comentando para um amigo: «Vês aquela loira? Se não quiser, não me caso com ela.» Em breve lhe fazia a corte e se tornavam noivos. Destacado o noivo como cônsul português em Durban, África do Sul, casam-se por procuração a 30 de dezembro de 1895, na Igreja de São Mamede, em Lisboa.\\nA 20 de janeiro de 1896, mãe e filho, acompanhados por um tio, Manuel Gualdino da Cunha, partem rumo à Madeira, e a 31 embarcam para Durban. Faz a instrução primária na escola de freiras irlandesas da West Street, onde fez a primeira comunhão, e percorre em dois anos o equivalente a quatro.\\nEm 1899 ingressa no Liceu de Durban, onde permanecerá durante três anos e será um dos primeiros alunos da turma. No mesmo ano, cria o pseudónimo Alexander Search, através do qual envia cartas a si mesmo. No ano de 1901, é aprovado com distinção no primeiro exame Cape School High Examination e escreve os primeiros poemas em inglês. Na mesma altura, morre sua irmã Madalena Henriqueta, de dois anos. Em 1901 parte com a família para Portugal, para um ano de férias. No navio em que viajam, o paquete König, vem o corpo da irmã. Em Lisboa, mora com a família em Pedrouços e depois na Avenida de D. Carlos I, n.º 109, 3.º Esquerdo. Na capital portuguesa, nasce João Maria, quarto filho do segundo casamento da mãe de Pessoa. Viaja com a sua família à Ilha Terceira, nos Açores, onde vive a família materna. Deslocam-se também a Tavira para visitar os parentes paternos. Nessa época, escreve o poema \\\"Quando ela passa\\\".\\nTendo de dividir a atenção da mãe com os filhos do casamento e com o padrasto, Pessoa isola-se, o que lhe propicia momentos de reflexão.\\nTendo recebido uma educação britânica, que lhe proporcionou um profundo contacto com a língua inglesa, os seus primeiros textos e estudos foram em inglês. Mantém contacto com a literatura inglesa através de autores como Shakespeare, Edgar Allan Poe, John Milton, Lord Byron, John Keats, Percy Shelley, Alfred Tennyson, entre outros. O Inglês teve grande destaque na sua vida, trabalhando com o idioma quando, mais tarde, se torna correspondente comercial em Lisboa, além de o utilizar em alguns dos seus textos e traduzir trabalhos de poetas ingleses, como \\\"O Corvo\\\" e \\\"Annabel Lee\\\" de Edgar Allan Poe. Com excepção de Mensagem, os únicos livros publicados em vida são os das coletâneas dos seus poemas ingleses: Antinous e 35 Sonnets e English Poems I - II e III, editados em Lisboa, em 1918 e 1921.\\nFernando Pessoa permanece em Lisboa, enquanto todos seus familiares — mãe, padrasto, irmãos e criada Paciência, que vieram com ele — regressam a Durban. Volta sozinho para África no vapor Herzog. Matricula-se na Durban Commercial School, escola comercial de ensino nocturno, enquanto de dia estuda as disciplinas humanísticas para entrar na universidade. Nesse período, tenta escrever contos em inglês, alguns dos quais com o pseudónimo de David Merrick, que deixa inacabados. Em 1903, candidata-se à Universidade do Cabo da Boa Esperança. Na prova de exame de admissão, não obtém boa classificação, mas tira a melhor nota entre os 899 candidatos no ensaio de estilo inglês. Recebe por isso o Queen Victoria Memorial Prize («Prémio Rainha Vitória»). Um ano depois, ingressa novamente na Durban High School, onde frequenta o equivalente a um primeiro ano universitário. Aprofunda a sua cultura, lendo clássicos ingleses e latinos. Escreve poesia e prosa em inglês, surgindo os heterónimos Charles Robert Anon e H. M. F. Lecher. Nasce a sua irmã Maria Clara. Publica no jornal do liceu um ensaio crítico intitulado \\\"Macaulay\\\". Por fim, encerra os seus bem-sucedidos estudos na África do Sul com o Intermediate Examination in Arts, na Universidade, obtendo uma boa classificação.\\nDeixando a família em Durban, regressa definitivamente à capital portuguesa, sozinho, em 1905. Passa a viver com a avó Dionísia e as duas tias na Rua da Bela Vista, n.º 17. A mãe e o padrasto regressam também a Lisboa, durante um período de férias de um ano em que Pessoa volta a morar com eles. Continua a produção de poemas em inglês e, em 1906, matricula-se no Curso Superior de Letras (atual Faculdade de Letras da Universidade de Lisboa), que abandona sem sequer completar o primeiro ano. É nesta época que entra em contacto com importantes escritores e jornalistas portugueses. Interessa-se pela obra de Cesário Verde e pelos sermões do Padre António Vieira.\\nEm agosto de 1907, morre a sua avó Dionísia, deixando-lhe uma pequena herança, com a qual monta uma pequena tipografia, na Rua da Conceição da Glória, 38-4.º, sob o nome de «Empreza Ibis — Typographica e Editora — Officinas a Vapor», que rapidamente vai à falência. A partir de 1908, aluga o seu primeiro quarto no Largo do Carmo 18, 1º Esqº, dedica-se à tradução de correspondência comercial, uma ocupação a que poderíamos dar o nome de \\\"correspondente estrangeiro\\\". Nessa atividade trabalha a vida toda, tendo uma modesta vida pública. Neste período inicia colaboração com o publicista José Boavida Portugal, com artigos de crítica literária e dramática.\\nInicia a sua atividade de ensaísta e crítico literário com o artigo «A Nova Poesia Portuguesa Sociologicamente Considerada», a que se seguiriam «Reincidindo…» e «A Nova Poesia Portuguesa no Seu Aspecto Psicológico» publicados em 1912 pela revista A Águia, órgão da Renascença Portuguesa. Frequenta a tertúlia literária que se formou em torno do seu tio adoptivo, o poeta, general aposentado Henrique Rosa, no café A Brasileira, no Largo do Chiado em Lisboa. Mais tarde, já nos anos vinte, o seu café preferido seria o Martinho da Arcada, na Praça do Comércio, onde escrevia e se encontrava com amigos e escritores.\\nEm 1915 participou na revista literária Orpheu, a qual lançou o movimento modernista em Portugal, causando algum escândalo e muita controvérsia. Esta revista publicou apenas dois números, nos quais Pessoa publicou em seu nome, bem como com o heterónimo Álvaro de Campos. No segundo número da Orpheu, Pessoa assume a direcção da revista, juntamente com Mário de Sá-Carneiro.\\nEm outubro de 1924, juntamente com o artista plástico Ruy Vaz, Fernando Pessoa lançou a revista Athena, na qual fixou o «drama em gente» dos seus heterónimos, publicando poesias de Ricardo Reis, Álvaro de Campos e Alberto Caeiro, bem como do ortónimo Fernando Pessoa.\\nNo número três da revista Sudoeste: cadernos de Almada Negreiros de novembro de 1935 (mês da sua morte) encontra-se um breve artigo da sua autoria intitulado \\\"Nós os de Orpheu\\\" e o poema \\\"Concelho\\\".\\nFernando Pessoa foi internado no dia 29 de Novembro de 1935, no Hospital de São Luís dos Franceses, em Lisboa, com diagnóstico de \\\"cólica hepática\\\" causada por cálculo biliar associado a cirrose hepática,[carece de fontes?] diagnóstico que é hoje contestado por estudos médicos,[carece de fontes?] embora o excessivo consumo de álcool ao longo da sua vida seja consensualmente considerado como um importante factor causal.[carece de fontes?] Segundo um desses estudos, Pessoa não revelava alguns dos sintomas mais típicos de cirrose hepática, tendo provavelmente sido vítima de uma pancreatite aguda ou, de acordo com o seu registo de óbito, \\\"obstrução intestinal\\\". Morreu nesse hospital, na freguesia de Santa Catarina, em Lisboa, no dia 30 de novembro de 1935, pelas 20h, com 47 anos. Apenas em 1985 foi averbado no registo de óbito o local correto da morte do poeta, que, até então, se julgava ter ocorrido na sua residência da Rua Coelho da Rocha, em Campo de Ourique, onde se encontra atualmente instalada a Casa Fernando Pessoa. No dia anterior, escrevera sua última frase, em inglês: \\\"I know not what tomorrow will bring\\\" (\\\"Não sei o que o amanhã trará\\\"). O funeral realizou-se a 2 de dezembro de 1935 para o Cemitério dos Prazeres.\\nPode-se dizer que a vida do poeta foi dedicada a criar e que, de tanto criar, criou outras vidas através dos seus heterónimos, o que foi a sua principal característica e motivo de interesse pela sua pessoa, aparentemente muito pacata. Alguns críticos questionam se Pessoa realmente teria transparecido o seu verdadeiro eu ou se tudo não teria passado de um produto, entre tantos, da sua vasta criação. Ao tratar de temas subjetivos e usar a heteronímia, torna-se enigmático ao extremo. Este facto é o que move grande parte das buscas para estudar a sua obra. O poeta e crítico brasileiro Frederico Barbosa declara que Fernando Pessoa foi \\\"o enigma em pessoa\\\". Escreveu sempre, desde o primeiro poema aos sete anos, até ao leito de morte. Importava-se com a intelectualidade do homem, e pode-se dizer que a sua vida foi uma constante divulgação da língua portuguesa: nas próprias palavras do heterónimo Bernardo Soares, \\\"a minha pátria é a língua portuguesa\\\". O mesmo empenho é patente nesta carta:\\nAnalogamente a Pompeu, que, segundo Plutarco, teria dito a frase \\\"navigare necesse, vivere non est necesse\\\" (\\\"navegar é necessário; viver não é necessário\\\"), Pessoa diz, no poema Navegar é Preciso, que \\\"viver não é necessário; o que é necessário é criar\\\". Outra interpretação comum deste poema diz respeito ao facto de a navegação ter resultado de uma atitude racionalista do mundo ocidental: a navegação exigiria uma precisão que a vida poderia dispensar.\\nO poeta mexicano Octavio Paz, laureado com o Nobel de Literatura, diz que \\\"os poetas não têm biografia. A sua obra é a sua biografia\\\" e que, no caso de Fernando Pessoa, \\\"nada na sua vida é surpreendente — nada, excepto os seus poemas\\\". Em The Western Canon, Harold Bloom incluiu-o entre os cânones ocidentais, no capítulo Borges, Neruda e Pessoa: o Whitman Hispano-Português (p. 451, 1995).\\nNa comemoração do centenário do nascimento de Pessoa, em 1988, o seu corpo foi trasladado para o Mosteiro dos Jerónimos, confirmando o reconhecimento que não teve em vida.\\nNa sua residência na Rua Coelho da Rocha, em Campo de Ourique, em Lisboa, foi criada a Casa Fernando Pessoa.\\nConsidera-se que a grande criação estética de Pessoa foi a invenção heteronímica que atravessa toda a sua obra. Os heterónimos, diferentemente dos pseudónimos, são personalidades poéticas completas: identidades que, em princípio falsas, se tornam verdadeiras através da sua manifestação artística própria e diversa do autor original. Entre os heterónimos, o próprio Fernando Pessoa passou a ser chamado ortónimo, porquanto era a personalidade original. Entretanto, com o amadurecimento de cada uma das outras personalidades, o próprio ortónimo tornou-se apenas mais um heterónimo entre os outros. Os três heterónimos mais conhecidos (e também aqueles com maior obra poética) foram Álvaro de Campos, Ricardo Reis e Alberto Caeiro. Um quarto heterónimo de grande importância na obra de Pessoa é Bernardo Soares, autor do Livro do Desassossego, importante obra literária do século XX. Bernardo é considerado um semi-heterónimo por ter muitas semelhanças com Fernando Pessoa e não possuir uma personalidade muito característica, ao contrário dos três primeiros, que possuem até mesmo data de nascimento e morte (exceção para Ricardo Reis, que não possui data de falecimento). Por essa razão, José Saramago, laureado com o Prémio Nobel, escreveu o livro O ano da morte de Ricardo Reis.\\nAtravés dos heterónimos, Pessoa conduziu uma profunda reflexão sobre a relação entre verdade, existência e identidade. Este último fator possui grande notabilidade na famosa misteriosidade do poeta.\\nDiversos estudiosos de Pessoa procuraram enumerar seus pseudónimos, heterónimos, semi-heterónimos, personagens fictícias e poetas mediúnicos. Em 1966 a portuguesa Teresa Rita Lopes fez um primeiro levantamento, com 18 nomes. Antonio Pina Coelho, também português, elevou em seguida a relação para 21. A mesma Teresa Rita Lopes apresentou um levantamento mais detalhado em 1990, chegando a 72 nomes. Em 2009 o holandês Michaël Stoker chegou a 83 heterónimos. Mais recentemente, o brasileiro José Paulo Cavalcanti Filho, utilizando critério mais amplo, apresentou uma lista com 127 nomes.\\nA obra ortónima de Pessoa passou por diferentes fases, mas envolve basicamente a procura de um certo patriotismo perdido, através de uma atitude sebastianista reinventada. O ortónimo foi profundamente influenciado, em vários momentos, por doutrinas religiosas (como a teosofia) e sociedades secretas (como a Maçonaria). A poesia resultante tem um certo ar mítico, heróico (quase épico, mas não na acepção original do termo) e por vezes trágico. Pessoa é um poeta universal, na medida em que nos foi dando, mesmo com contradições, uma visão simultaneamente múltipla e unitária da vida. Uma explicação para a criação dos três principais heterónimos e o semi-heterónimo Bernardo Soares, reside nas várias formas que tinha de olhar o mundo, apoiando-se no racionalismo e pensamento oriental.\\nO ortónimo é considerado, só por si, como simbolista e modernista pela evanescência, indefinição e insatisfação, bem como pela inovação praticada através de diversas sendas de formulação do discurso poético (sensacionismo, paulismo, interseccionismo, etc.).\\nFernando Pessoa foi marcado também pela poesia musical e subjetiva, voltada essencialmente para a metalinguagem e os temas relativos a Portugal, como o sebastianismo presente na principal obra de \\\"Pessoa ele-mesmo\\\", Mensagem, uma coletânea de poemas sobre as grandes personagens históricos portugueses. Publicado em 1934, apenas um ano antes da morte do autor, este foi o único livro de Fernando Pessoa em Língua Portuguesa editado em vida. Foi contemplado com o Prémio Antero de Quental, na categoria de «poema ou poesia solta», do Secretariado da Propaganda Nacional (SPN).\\nEntre todos os heterónimos, Álvaro de Campos foi o único a manifestar fases poéticas diferentes ao longo da sua obra. Era um engenheiro de educação inglesa e origem portuguesa, mas sempre com a sensação de ser um estrangeiro em qualquer parte do mundo.\\nComeça a sua trajetória como um decadentista (influenciado pelo simbolismo), mas logo adere ao futurismo. Álvaro de Campos é revoltado e crítico e faz a apologia da velocidade e da vida moderna, com uma linguagem livre, radical. Nesta época escreveu as \\\"Odes\\\", publicadas na revista Orpheu, em 1915, e o \\\"Ultimatum\\\", publicado na revista Portugal Futurista, em 1917.\\nApós uma série de desilusões com a existência, assume uma veia niilista, expressa no poema \\\"Tabacaria\\\", considerado um dos mais conhecidos e influentes poemas da língua portuguesa.\\nO heterónimo Ricardo Reis é descrito como um médico que se definia como latinista e monárquico. De certa maneira, simboliza a herança clássica na literatura ocidental, expressa na simetria, na harmonia e num certo bucolismo, com elementos epicuristas e estoicos. O fim inexorável de todos os seres vivos é uma constante na sua obra, clássica, depurada e disciplinada. Faz uso da mitologia não cristã.\\nSegundo Pessoa, Reis mudou-se para o Brasil em protesto à proclamação da República em Portugal e não se sabe o ano da sua morte.\\nEm O ano da morte de Ricardo Reis, José Saramago continua, numa perspectiva pessoal, o universo deste heterónimo após a morte de Fernando Pessoa, cujo fantasma estabelece um diálogo com o seu heterónimo, sobrevivente ao criador.\\nPor sua vez, Caeiro, nascido em Lisboa, teria vivido quase toda a vida como camponês, quase sem estudos formais. Teve apenas a instrução primária, mas é considerado o mestre entre os heterónimos (pelo ortónimo). Depois da morte do pai e da mãe, permaneceu em casa com uma tia-avó, vivendo de modestos rendimentos e morreu de tuberculose. Também é conhecido como o poeta-filósofo, mas rejeitava este título e pregava uma \\\"não filosofia\\\". Acreditava que os seres simplesmente são, e nada mais: irritava-se com a metafísica e qualquer tipo de simbologia para a vida.\\nOs escritos pessoanos que versam sobre a caracterização dos heterónimos, \\\"Pessoa-ele-mesmo\\\", Álvaro de Campos, Ricardo Reis e o meio-heterónimo Bernardo Soares, conferem a Alberto Caeiro um papel quase místico, enquanto poeta e pensador. Reis e Soares chegam a compará-lo ao deus Pã, e Pessoa esboça-lhe um horóscopo no qual lhe atribui o signo de leão, associado ao elemento fogo. A relevância destas alusões advém da explicação de Fernando Pessoa sobre o papel de Caeiro no escopo da heteronímia. Citando a atuação dos quatro elementos da astrologia sobre a personalidade dos indivíduos, Pessoa escreve:\\nDos principais heterónimos de Fernando Pessoa, Caeiro foi o único a não escrever em prosa. Alegava que somente a poesia seria capaz de dar conta da realidade.\\nPossuía uma linguagem estética direta, concreta e simples mas, ainda assim, bastante complexa do ponto de vista reflexivo. O seu ideário resume-se no verso Há metafísica bastante em não pensar em nada. A sua obra está agrupada na coletânea Poemas Completos de Alberto Caeiro.\\nBernardo Soares é, dentro da ficção de seu próprio Livro do Desassossego, um simples ajudante de guarda-livros na cidade de Lisboa. Conheceu Fernando Pessoa numa pequena casa de pasto frequentada por ambos. Foi aí que Bernardo deu a ler a Fernando seu livro, que, mesmo escrito em forma de fragmentos, é considerado uma das obras fundadoras da ficção portuguesa no século XX.\\nBernardo Soares é muitas vezes considerado um semi-heterónimo porque, como seu próprio criador explica:\\nA instância da ficção que se desenvolve no livro é insignificante, porque trata-se de uma \\\"autobiografia sem factos\\\", como o próprio Fernando Pessoa situa o livro. Dessa forma, o que interessa em sua prosa fragmentária é a dramaticidade das reflexões humanas que vêm à tona na insistência de uma escrita que se reconhece inviável, inútil e imperfeita, à beira do tédio, do trágico e da indiferença estética. O facto de Fernando Pessoa considerar (em cartas e anotações pessoais) Bernardo Soares um semi-heterónimo faz pensar na maior proximidade de temperamento entre Pessoa e Soares. Nesse sentido, para alguns, o jogo heteronímico ganha em complexidade e Pessoa logra o êxito da construção de si mesmo como o mais instigante mito literário português na Modernidade.\\nEntre fevereiro e outubro de 1935, último ano de sua vida, Fernando Pessoa produziu uma série de escritos políticos, vários deles contra Salazar e o Estado Novo, e dois textos sobre a invasão da Abissínia (atual Etiópia) pela Itália fascista, que a censura salazarista não deixou passar. Nessa produção, em que Pessoa se define claramente como um opositor não só do salazarismo, como também do fascismo, incluem-se, entre outros, o artigo \\\"Associações secretas\\\", em defesa da Maçonaria, além de numerosos fragmentos deixados inéditos pelo autor, relacionados com a polêmica que o artigo gerou na imprensa; uma dúzia de poemas satíricos contra Salazar e o Estado Novo; diversos textos e poemas anticatólicos, nos quais criticava a crescente influência da Igreja na política portuguesa; um longo artigo crítico sobre o próprio Salazar, em francês; uma carta ao presidente da República, Óscar Carmona, protestando contra o governo; uma crítica contundente a um discurso de cunho totalitário, proferido pelo ministro da Justiça, Manuel Rodrigues, e outros textos que mostram o crescente empenho político de Pessoa, no fim da vida, em defesa da liberdade e da dignidade humanas, que ele julgava então ameaçadas, tanto em Portugal como no resto do mundo.\\nSobre a República escreve Fernando Pessoa:\\n(in \\\"da República\\\" Recolha de textos de : Maria Isabel Rocheta e Maria Paula Morão. Introdução e organização de Joel Serrão. Edições Ática, Lisboa, 1978.\\nEm uma nota biográfica datilografada em 30 de março de 1935, Pessoa declara ser um \\\"Cristão gnóstico, e portanto inteiramente oposto a todas as Igrejas organizadas, sobretudo à Igreja de Roma. Fiel, por motivos que mais adiante estão implícitos, à Tradição Secreta do Cristianismo, que tem íntimas relações com a Tradição Secreta em Israel (a Santa Kaballah) e com a essência oculta da Maçonaria\\\". Ali também declara ser um iniciado \\\"nos três graus menores da (aparentemente extinta) Ordem Templária de Portugal\\\".\\nEm texto de 1917, Pessoa esclarece sua visão do neopaganismo: \\\"Eu sou um pagão decadente, do tempo do outono da Beleza; do sonolecer [?] da limpidez antiga, místico intelectual da raça triste dos neoplatónicos da Alexandria. Como eles creio, e absolutamente creio, nos Deuses, na sua agência e na sua existência real e materialmente superior. Como eles creio nos semi-deuses, os homens que o esforço e a… ergueram ao sólio dos imortais; porque, como disse Píndaro, «a raça dos deuses e dos homens é uma só». Como eles creio que acima de tudo, pessoa impassível, causa imóvel e convicta [?], paira o Destino, superior ao bem e ao mal, estranho à Beleza e à Fealdade, além da Verdade e da Mentira. Mas não creio que entre o Destino e os Deuses haja só o oceano turvo… o céu mudo da Noite eterna. Creio, como os neoplatónicos, no Intermediário Intelectual, Logos na linguagem dos filósofos, Cristo (depois) na mitologia cristã\\\".\\nOs principais heterónimos de Fernando Pessoa – Alberto Caeiro, Ricardo Reis e Álvaro de Campos – são diretamente ligados ao neopaganismo. Álvaro de Campos, em notas publicadas em 1931 na revista Presença, nº 30, escreve: \\\"O meu mestre Caeiro não era pagão: era o paganismo. O Ricardo Reis é um pagão, o António Mora é um pagão, eu sou um pagão, o próprio Fernando Pessoa seria um pagão, se não fosse um novelo embrulhado para o lado de dentro\\\".\\nEm texto acerca de sua heteronímia, escrito provavelmente em 1930, Pessoa explica:\\nFernando Pessoa interessava-se pelo ocultismo e pelo misticismo, com destaque para a Maçonaria e a Rosa-cruz, havendo inclusive defendido publicamente as organizações iniciáticas no Diário de Lisboa (4 de fevereiro de 1935), contra ataques por parte da ditadura do Estado Novo. O seu poema hermético mais conhecido e apreciado entre os estudantes de esoterismo intitula-se \\\"No Túmulo de Christian Rosenkreutz\\\". Tinha o hábito de fazer consultas astrológicas para si mesmo (de acordo com a sua certidão de nascimento, nasceu às 15h20, tinha ascendente Escorpião e o Sol em Gémeos). Realizou mais de mil horóscopos.\\nApreciava também muito o trabalho de Helena Blavatsky tendo traduzido, em 1916, A voz do silêncio, assim como lhe suscitava curiosidade o ocultista Aleister Crowley, tendo-lhe traduzido o poema Hino a Pã. Lendo uma publicação inglesa de Crowley, encontrou erros no horóscopo e escreveu-lhe para o corrigir. Os seus conhecimentos de astrologia impressionaram Crowley e, como este gostava de viagens, foi a Portugal conhecer o poeta. Acompanhou-o a maga alemã Hanni Larissa Jaeger. O encontro entre Pessoa e Crowley ocorreu com algum sensacionalismo, dado o poeta inglês ter simulado o seu suicídio na Boca do Inferno, o que atraiu várias polícias europeias e a atenção da mídia da época. Pessoa estaria dentro da encenação, tendo combinado com Crowley a notificação dos jornais e a redacção de um \\\"romance policiário\\\" cujos direitos reverteriam a favor dos dois poetas. Apesar de ter escrito várias dezenas de páginas, essa obra de ficção nunca se concretizou.\\nA seguir apresenta-se uma cronologia abreviada da vida do poeta:\",\r\n    \"coverImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Pessoa_chapeu.jpg/200px-Pessoa_chapeu.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/authors/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"fullName\": \"José Luís Peixoto 2\",\r\n    \"birthDateString\": \"1974-09-04\",\r\n    \"deathDateString\": null,\r\n    \"nationality\": \"Português\",\r\n    \"wikipediaUrl\": \"https://pt.wikipedia.org/wiki/José_Luís_Peixoto\",\r\n    \"biography\": \"José Luís Marques Peixoto (Galveias, Ponte de Sor, 4 de setembro de 1974) é um narrador, poeta e dramaturgo português, cuja primeira obra foi publicada em 2000.\\nFilho de José João Serrano Peixoto, José Luís Peixoto nasceu na Vila de Galveias, no Alto Alentejo, onde viveu até aos 18 anos, idade em que foi estudar para a Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa. Após terminar a sua licenciatura em Línguas e Literaturas Modernas, na variante de estudos ingleses e alemães, foi professor em várias escolas portuguesas e na Cidade da Praia, em Cabo Verde. Em 2001, dedicou-se profissionalmente à escrita.\\nCom apenas 27 anos, José Luís Peixoto foi o mais jovem vencedor de sempre do Prémio Literário José Saramago. Desde esse reconhecimento, a sua obra tem recebido amplo destaque nacional e internacional. Os seus livros estão traduzidos e publicados em 26 idiomas. Foi o primeiro autor de língua portuguesa a ser traduzido e publicado na Arménia (Morreste-me, 2019), na Geórgia (Galveias, 2017) e na Mongólia (A Mãe que Chovia, 2016).\\nMorreste-me foi escolhido como um dos 10 livros da primeira década do século XXI pela revista Visão. Nas mesmas condições, Nenhum Olhar foi escolhido como um dos livros da década pelo jornal Expresso.\\nNenhum Olhar foi incluído na lista do Financial Times dos melhores romances publicados em Inglaterra em 2007, tendo também sido incluído no programa Discover Great New Writers das livrarias americanas Barnes & Noble.\\nA sua obra tem sido abundantemente adaptada para espetáculos e obras artísticas de diversos géneros.\\nTem sido colunista de vários órgãos da imprensa portuguesa, como é o caso do Jornal de Letras ou das revistas Visão, GQ, Time Out, Notícias Magazine, UP, entre outras.\\nA obra de José Luís Peixoto apresenta assinalável coesão formal e temática. Nenhum Olhar, Cal ou Galveias revelam uma nova abordagem aos temas alentejanos na literatura portuguesa. A ruralidade é retratada através de grande sofisticação formal, com uma inédita matriz pós-moderna. Podendo estabelecer relações com a história de Portugal — como em Cemitério de Pianos, Livro ou Em Teu Ventre —, é também comum que as obras de José Luís Peixoto tratem as relações pessoais e/ou familiares, com uma forte carga autobiográfica — como em Morreste-me, Abraço, todos os seus títulos poéticos ou, mesmo, Dentro do Segredo. A alegoria ocupa também um lugar importante na sua escrita, através dos títulos Uma Casa na Escuridão e Antídoto. Estas abordagens, no entanto, estão distribuídas um pouco por toda a sua obra, não sendo difícil assinalar livros que contenham vários destes temas principais em simultâneo, a saber: ruralidade, relações com a história, análise das relações pessoais e/ou familiares, modelos alegóricos.\\n\\\"Uma das revelações mais surpreendentes da literatura portuguesa. É um homem que sabe escrever e que vai ser o continuador dos grande escritores.\\\" José Saramago\\n\\\"Peixoto tem uma extraordinária forma de interpretar o mundo, expressa pelas suas escolhas certeiras de linguagem e de imagens.\\\" Times Literary Supplement\\n\\\"Um valor seguro da literatura portuguesa, com grande sentido de linguagem poética e grande domínio da língua portuguesa.\\\" Manuel Vásquez Montálban\\n\\\"O fantástico é contado com a naturalidade do quotidiano. A crónica e a fábula sobrepõem-se, como as histórias que contam ou presenciam ou calam as personagens de William Faulkner ou de Juan Rulfo.\\\" António Muñoz Molina\\n\\\"Como Saramago, José Luís Peixoto é um escritor tocado pelo génio.\\\" Urbano Tavares Rodrigues\\n\\\"Um dos escritores mais dotados do seu país.\\\" Le Monde\\n\\\"Peixoto articula um interessante discurso sobre a identidade e a orfandade, e elabora em paralelo um maravilhoso retrato psicológico do mundo rural português.\\\" El País\\nOs seus livros têm tido referências críticas em publicações internacionais de referência como: The Independent, The Guardian, Times Literary Suplement, Esquire, Monocle, Metro, Time Out New York, San Francisco Chronicle, El País, El Mundo, ABC, Le Figaro, Le Monde, La Reppublica, Corriere de la Sera, L'Unità, Folha de S.Paulo, Estado de São Paulo, etc.\",\r\n    \"coverImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/JoseLuisPeixoto.JPG/223px-JoseLuisPeixoto.JPG\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/authors/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authors",
+								"17"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "filter",
+					"item": [
+						{
+							"name": "[xpath] get book by title",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/title?target=Elizabeth%20Finch",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"title"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Elizabeth%20Finch"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] get book by language",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/language?target=Portugu%C3%AAs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"language"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Portugu%C3%AAs"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] get book by publicationDateString",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/publicationDateString?target=05-2021",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"publicationDateString"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "05-2021"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] get book by isbn",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/isbn?target=9789897845390",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"isbn"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "9789897845390"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xpath] get book by pages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/pages?target=320",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"pages"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "320"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xquery] get book by publisher",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/publisher?target=Elementos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"publisher"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "Elementos"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xquery] get books with max price",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/maxPrice?target=8.0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"maxPrice"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "8.0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[xquery] get the most expensive x books",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/books/filter/mostExpensive?target=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"books",
+										"filter",
+										"mostExpensive"
+									],
+									"query": [
+										{
+											"key": "target",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/books/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"books",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get book by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/books/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"books",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sync books of one specific author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/books/author/3/sync",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"books",
+								"author",
+								"3",
+								"sync"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "output",
+			"item": [
+				{
+					"name": "[xslt] Get authors html list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/output/html/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"output",
+								"html",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[xslt] Get books html list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/output/html/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"output",
+								"html",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View all authors in txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/output/txt/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"output",
+								"txt",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save all authors to the current_authors.txt file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/output/txt/authors?saveFile=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"output",
+								"txt",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "saveFile",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -128,7 +128,7 @@ public class AuthorController {
         Author author = wikipediaRegexService.fetchAuthorInfoWithRegex(name);
 
         if(author == null || author.getBirthDateString() == null ){
-            return ResponseEntity.ok("Author " + author.getFullName() + " not found!");
+            return ResponseEntity.ok("Author " + name + " not found!");
         }
 
         //check if author exists
