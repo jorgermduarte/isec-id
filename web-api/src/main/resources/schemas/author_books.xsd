@@ -26,6 +26,21 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="coverImageUrl" type="xs:string" minOccurs="0" />
+            <xs:element name="literaryGenre" type="xs:string" minOccurs="0" />
+            <xs:element name="occupations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="occupation" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="prizes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="prize" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:all>
     </xs:complexType>
 
